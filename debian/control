@@ -1,0 +1,12 @@
+Source: ros-dashing-self-test
+Section: misc
+Priority: extra
+Maintainer: Brice Rebsamen <brice.rebsamen@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-dashing-ament-cmake, ros-dashing-ament-cmake-gtest, ros-dashing-ament-lint-auto, ros-dashing-ament-lint-common, ros-dashing-diagnostic-msgs, ros-dashing-diagnostic-updater, ros-dashing-rclcpp, ros-dashing-ros-workspace
+Homepage: http://www.ros.org/wiki/self_test
+Standards-Version: 3.9.2
+
+Package: ros-dashing-self-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-dashing-diagnostic-msgs, ros-dashing-diagnostic-updater, ros-dashing-rclcpp, ros-dashing-ros-workspace
+Description: self_test
