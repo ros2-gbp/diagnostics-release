@@ -1,0 +1,13 @@
+Source: ros-dashing-diagnostic-updater
+Section: misc
+Priority: extra
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-dashing-ament-cmake, ros-dashing-ament-cmake-gtest, ros-dashing-ament-cmake-pytest, ros-dashing-ament-cmake-python, ros-dashing-ament-lint-auto, ros-dashing-ament-lint-common, ros-dashing-diagnostic-msgs, ros-dashing-rclcpp, ros-dashing-rclcpp-lifecycle, ros-dashing-rclpy, ros-dashing-std-msgs, ros-dashing-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_updater
+Standards-Version: 3.9.2
+
+Package: ros-dashing-diagnostic-updater
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-dashing-diagnostic-msgs, ros-dashing-rclcpp, ros-dashing-rclpy, ros-dashing-std-msgs, ros-dashing-ros-workspace
+Description: diagnostic_updater contains tools for easily updating diagnostics.
+ it is commonly used in device drivers to keep track of the status of output topics, device status, etc.
