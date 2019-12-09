@@ -1,0 +1,12 @@
+Source: ros-eloquent-self-test
+Section: misc
+Priority: optional
+Maintainer: Brice Rebsamen <brice.rebsamen@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-eloquent-ament-cmake, ros-eloquent-ament-cmake-gtest, ros-eloquent-ament-lint-auto, ros-eloquent-ament-lint-common, ros-eloquent-diagnostic-msgs, ros-eloquent-diagnostic-updater, ros-eloquent-rclcpp, ros-eloquent-ros-workspace
+Homepage: http://www.ros.org/wiki/self_test
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-self-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-eloquent-diagnostic-msgs, ros-eloquent-diagnostic-updater, ros-eloquent-rclcpp, ros-eloquent-ros-workspace
+Description: self_test
