@@ -1,0 +1,13 @@
+Source: ros-eloquent-diagnostic-updater
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-eloquent-ament-cmake, ros-eloquent-ament-cmake-gtest, ros-eloquent-ament-cmake-pytest, ros-eloquent-ament-cmake-python, ros-eloquent-ament-lint-auto, ros-eloquent-ament-lint-common, ros-eloquent-diagnostic-msgs, ros-eloquent-rclcpp, ros-eloquent-rclcpp-lifecycle, ros-eloquent-rclpy, ros-eloquent-std-msgs, ros-eloquent-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_updater
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-diagnostic-updater
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-eloquent-diagnostic-msgs, ros-eloquent-rclcpp, ros-eloquent-rclpy, ros-eloquent-std-msgs, ros-eloquent-ros-workspace
+Description: diagnostic_updater contains tools for easily updating diagnostics.
+ it is commonly used in device drivers to keep track of the status of output topics, device status, etc.
