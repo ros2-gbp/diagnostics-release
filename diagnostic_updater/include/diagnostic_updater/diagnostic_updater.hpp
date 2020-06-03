@@ -486,8 +486,8 @@ private:
   void reset_timer()
   {
     update_timer_ = rclcpp::create_timer(
-      base_interface_.get(),
-      timers_interface_.get(),
+      base_interface_,
+      timers_interface_,
       clock_,
       period_,
       std::bind(&Updater::update, this));
@@ -578,8 +578,7 @@ private:
       status_vec.begin();
       iter != status_vec.end(); iter++)
     {
-      // see https://github.com/ros/diagnostics/pull/109
-      iter->name = node_name_.substr(1) + std::string(": ") + iter->name;
+      iter->name = node_name_ + std::string(": ") + iter->name;
     }
     diagnostic_msgs::msg::DiagnosticArray msg;
     msg.status = status_vec;
