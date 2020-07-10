@@ -1,3 +1,29 @@
+## diagnostics (foxy) - 2.0.3-1
+
+The packages in the `diagnostics` repository were released into the `foxy` distro by running `/Users/karsten/.pyenv/versions/3.7.4/bin/bloom-release diagnostics -r foxy` on `Fri, 10 Jul 2020 02:39:17 -0000`
+
+These packages were released:
+- `diagnostic_aggregator`
+- `diagnostic_updater`
+- `self_test`
+
+Version of package(s) in repository `diagnostics`:
+
+- upstream repository: https://github.com/ros/diagnostics.git
+- release repository: https://github.com/ros2-gbp/diagnostics-release.git
+- rosdistro version: `2.0.2-1`
+- old version: `2.0.2-1`
+- new version: `2.0.3-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.3`
+- catkin_pkg version: `0.4.16`
+- rosdep version: `0.17.1`
+- rosdistro version: `0.8.2`
+- vcstools version: `0.1.42`
+
+
 ## diagnostics (foxy) - 2.0.2-1
 
 The packages in the `diagnostics` repository were released into the `foxy` distro by running `/Users/karsten/.pyenv/versions/3.7.4/bin/bloom-release -r foxy diagnostics` on `Wed, 03 Jun 2020 23:03:40 -0000`
