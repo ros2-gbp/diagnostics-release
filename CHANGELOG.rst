@@ -7,6 +7,9 @@ Changelog for package self_test
 * fix linters (`#134 <https://github.com/ros/diagnostics/issues/134>`_)
 * Contributors: Karsten Knese
 
+2.0.3 (2020-07-09)
+------------------
+
 2.0.2 (2020-06-03)
 ------------------
 * 2.0.2
