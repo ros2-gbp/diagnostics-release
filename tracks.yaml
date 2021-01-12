@@ -84,12 +84,12 @@ tracks:
       -i :{release_inc} --os-name debian --os-not-required
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc}
-    devel_branch: foxy
+    devel_branch: ros2-devel
     last_version: 2.0.5
     name: diagnostics
     patches: null
     release_inc: '1'
-    release_repo_url: null
+    release_repo_url: https://github.com/ros2-gbp/diagnostics-release.git
     release_tag: :{version}
     ros_distro: rolling
     vcs_type: git
