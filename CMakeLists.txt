@@ -11,9 +11,8 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
-# order matters here: https://github.com/ros2/ros2/issues/927
-find_package(pluginlib REQUIRED)
 find_package(diagnostic_msgs REQUIRED)
+find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
@@ -125,7 +124,7 @@ install( # launch descriptor
   DESTINATION share/${PROJECT_NAME}
 )
 install( # example publisher
-  FILES example/example_pub.py
+  PROGRAMS example/example_pub.py
   DESTINATION lib/${PROJECT_NAME}
 )
 install( # example aggregator configration
