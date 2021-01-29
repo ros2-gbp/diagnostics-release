@@ -37,6 +37,7 @@
 
 #include "diagnostic_aggregator/aggregator.hpp"
 
+#include <chrono>
 #include <map>
 #include <memory>
 #include <mutex>
@@ -49,6 +50,7 @@ using std::placeholders::_1;
 using std::placeholders::_2;
 using std::placeholders::_3;
 
+using diagnostic_msgs::msg::DiagnosticArray;
 using diagnostic_msgs::msg::DiagnosticStatus;
 
 /**
@@ -70,7 +72,7 @@ Aggregator::Aggregator()
   if (!n_->get_parameters("", parameters)) {
     RCLCPP_ERROR(logger_, "Couldn't retrieve parameters.");
   }
-  RCLCPP_DEBUG(logger_, "Retrieved %d parameter(s).", parameters.size());
+  RCLCPP_DEBUG(logger_, "Retrieved %zu parameter(s).", parameters.size());
 
   for (const auto & param : parameters) {
     if (param.first.compare("pub_rate") == 0) {
@@ -95,15 +97,19 @@ Aggregator::Aggregator()
   other_analyzer_ = std::make_unique<OtherAnalyzer>(other_as_errors);
   other_analyzer_->init(base_path_);  // This always returns true
 
-  diag_sub_ = n_->create_subscription<diagnostic_msgs::msg::DiagnosticArray>(
-    "/diagnostics", rclcpp::SystemDefaultsQoS().keep_last(1000),
-    std::bind(&Aggregator::diagCallback, this, _1));
-  agg_pub_ = n_->create_publisher<diagnostic_msgs::msg::DiagnosticArray>("/diagnostics_agg", 1);
+  diag_sub_ = n_->create_subscription<DiagnosticArray>(
+    "/diagnostics", rclcpp::SystemDefaultsQoS(), std::bind(&Aggregator::diagCallback, this, _1));
+  agg_pub_ = n_->create_publisher<DiagnosticArray>("/diagnostics_agg", 1);
   toplevel_state_pub_ =
     n_->create_publisher<DiagnosticStatus>("/diagnostics_toplevel_state", 1);
+
+  int publish_rate_ms = 1000 / pub_rate_;
+  publish_timer_ = n_->create_wall_timer(
+    std::chrono::milliseconds(publish_rate_ms),
+    std::bind(&Aggregator::publishData, this));
 }
 
-void Aggregator::checkTimestamp(const diagnostic_msgs::msg::DiagnosticArray::SharedPtr diag_msg)
+void Aggregator::checkTimestamp(const DiagnosticArray::SharedPtr diag_msg)
 {
   RCLCPP_DEBUG(logger_, "checkTimestamp()");
   if (diag_msg->header.stamp.sec != 0) {
@@ -125,7 +131,7 @@ void Aggregator::checkTimestamp(const diagnostic_msgs::msg::DiagnosticArray::Sha
   }
 }
 
-void Aggregator::diagCallback(const diagnostic_msgs::msg::DiagnosticArray::SharedPtr diag_msg)
+void Aggregator::diagCallback(const DiagnosticArray::SharedPtr diag_msg)
 {
   RCLCPP_DEBUG(logger_, "diagCallback()");
   checkTimestamp(diag_msg);
@@ -156,7 +162,7 @@ Aggregator::~Aggregator()
 void Aggregator::publishData()
 {
   RCLCPP_DEBUG(logger_, "publishData()");
-  diagnostic_msgs::msg::DiagnosticArray diag_array;
+  DiagnosticArray diag_array;
   DiagnosticStatus diag_toplevel_state;
   diag_toplevel_state.name = "toplevel_state";
   diag_toplevel_state.level = DiagnosticStatus::STALE;
@@ -196,7 +202,9 @@ void Aggregator::publishData()
   agg_pub_->publish(diag_array);
 
   diag_toplevel_state.level = max_level;
-  if (max_level < 0 || (max_level > 2 && min_level <= 2)) {
+  if (max_level < 0 ||
+    (max_level > DiagnosticStatus::ERROR && min_level <= DiagnosticStatus::ERROR))
+  {
     // Top level is error if we got no diagnostic level or
     // have stale items but not all are stale
     diag_toplevel_state.level = DiagnosticStatus::ERROR;
