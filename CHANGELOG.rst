@@ -2,10 +2,12 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.7 (2021-03-04)
+------------------
+
 2.0.6 (2021-01-28)
 ------------------
 * Move Aggregator publishing to timer to allow subscription callback more processing time. (`#179 <https://github.com/ros/diagnostics/issues/179>`_)
-  Co-authored-by: Chris Bierl <cbierl@moog.com>
 * Contributors: cdbierl
 
 2.0.5 (2021-01-06)
