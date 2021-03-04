@@ -73,45 +73,24 @@ if(BUILD_TESTING)
   find_package(ament_cmake_pytest REQUIRED)
   find_package(launch_testing_ament_cmake REQUIRED)
 
-  file(TO_CMAKE_PATH "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}/aggregator_node" AGGREGATOR_NODE)
-  file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/test_listener.py" TEST_LISTENER)
-  set(create_analyzers_tests
+  set(aggregator_tests
     "primitive_analyzers"
     "all_analyzers"
     "analyzer_group")
-  foreach(test_name ${create_analyzers_tests})
-    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/${test_name}.yaml" PARAMETER_FILE)
-    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/expected_output/create_${test_name}" EXPECTED_OUTPUT)
+
+  foreach(aggregator_test ${aggregator_tests})
+    file(TO_CMAKE_PATH "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}/aggregator_node" AGGREGATOR_NODE)
+    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/${aggregator_test}.yaml" PARAMETER_FILE)
+    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/expected_output/${aggregator_test}" EXPECTED_OUTPUT)
 
     configure_file(
       "test/create_analyzers.launch.py.in"
-      "test_create_${test_name}.launch.py"
+      "test_${aggregator_test}.launch.py"
       @ONLY
     )
     add_launch_test(
-      "${CMAKE_CURRENT_BINARY_DIR}/test_create_${test_name}.launch.py"
-      TARGET "test_create_${test_name}"
-      TIMEOUT 30
-      ENV
-    )
-  endforeach()
-
-  set(analyzers_output_tests
-    "primitive_analyzers"
-    "all_analyzers"
-    "analyzer_group")
-  foreach(test_name ${create_analyzers_tests})
-    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/${test_name}.yaml" PARAMETER_FILE)
-    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/expected_output/output_${test_name}" EXPECTED_OUTPUT)
-
-    configure_file(
-      "test/test_analyzers_output.launch.py.in"
-      "test_output_${test_name}.launch.py"
-      @ONLY
-    )
-    add_launch_test(
-      "${CMAKE_CURRENT_BINARY_DIR}/test_output_${test_name}.launch.py"
-      TARGET "test_output_${test_name}"
+      "${CMAKE_CURRENT_BINARY_DIR}/test_${aggregator_test}.launch.py"
+      TARGET "test_${aggregator_test}"
       TIMEOUT 30
       ENV
     )
@@ -138,7 +117,7 @@ install(
 ament_python_install_package(${PROJECT_NAME})
 
 # Install Example
-set(ANALYZER_PARAMS_FILEPATH "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/example_analyzers.yaml")
+set(ANALYZER_PARAMS_FILEPATH "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/example.yaml")
 configure_file(example/example.launch.py.in example.launch.py @ONLY)
 install( # launch descriptor
   FILES ${CMAKE_CURRENT_BINARY_DIR}/example.launch.py
@@ -149,7 +128,7 @@ install( # example publisher
   DESTINATION lib/${PROJECT_NAME}
 )
 install( # example aggregator configration
-  FILES example/example_analyzers.yaml
+  FILES example/example.yaml
   DESTINATION share/${PROJECT_NAME}
 )
 
