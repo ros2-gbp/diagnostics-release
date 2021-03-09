@@ -249,7 +249,7 @@ class Updater(DiagnosticTaskVector):
         with self.lock:  # Make sure no adds happen while we are processing here.
             for task in self.tasks:
                 status = DiagnosticStatusWrapper()
-                status.level = b'2'
+                status.level = b'\x02'
                 status.name = task.name
                 status.message = 'No message was set'
                 status.hardware_id = self.hwid
@@ -329,22 +329,23 @@ class Updater(DiagnosticTaskVector):
         if not type(msg) is list:
             msg = [msg]
 
+        now = self.clock.now()
+        da = DiagnosticArray()
+        da.header.stamp = now.to_msg()  # Add timestamp for ROS 0.10
         for stat in msg:
             stat.name = self.node.get_name() + ': ' + stat.name
-        now = self.clock.now()
+            db = DiagnosticStatus()
+            db.name = stat.name
+            db.message = stat.message
+            db.hardware_id = stat.hardware_id
+            db.values = stat.values
+            db.level = stat.level
+            da.status.append(db)
 
-        da = DiagnosticArray()
-        db = DiagnosticStatus()
-        db.name = stat.name
-        db.message = stat.message
-        db.hardware_id = stat.hardware_id
-        db.values = stat.values
-        da.status.append(db)
-        da.header.stamp = now.to_msg()  # Add timestamp for ROS 0.10
         self.publisher.publish(da)
 
     def addedTaskCallback(self, task):
         stat = DiagnosticStatusWrapper()
         stat.name = task.name
-        stat.summary(b'0', 'Node starting up')
+        stat.summary(b'\x00', 'Node starting up')
         self.publish(stat)
