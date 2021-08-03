@@ -1,0 +1,12 @@
+Source: ros-galactic-diagnostic-aggregator
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-galactic-ament-cmake, ros-galactic-ament-cmake-gtest, ros-galactic-ament-cmake-pytest, ros-galactic-ament-cmake-python, ros-galactic-ament-lint-auto, ros-galactic-ament-lint-common, ros-galactic-diagnostic-msgs, ros-galactic-launch-testing-ament-cmake, ros-galactic-launch-testing-ros, ros-galactic-pluginlib, ros-galactic-rclcpp, ros-galactic-rclpy, ros-galactic-std-msgs, ros-galactic-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_aggregator
+Standards-Version: 3.9.2
+
+Package: ros-galactic-diagnostic-aggregator
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-galactic-rclpy, ros-galactic-ros-workspace
+Description: diagnostic_aggregator
