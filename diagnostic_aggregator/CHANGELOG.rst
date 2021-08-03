@@ -2,6 +2,9 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.1.3 (2021-08-03)
+------------------
+
 2.1.2 (2021-03-03)
 ------------------
 * Adapt new launch file syntax. (`#190 <https://github.com/ros/diagnostics/issues/190>`_)
