@@ -1,3 +1,29 @@
+## diagnostics (rolling) - 2.1.3-1
+
+The packages in the `diagnostics` repository were released into the `rolling` distro by running `/Users/karsten/.pyenv/versions/3.8.0/bin/bloom-release -r rolling diagnostics` on `Tue, 03 Aug 2021 22:27:13 -0000`
+
+These packages were released:
+- `diagnostic_aggregator`
+- `diagnostic_updater`
+- `self_test`
+
+Version of package(s) in repository `diagnostics`:
+
+- upstream repository: https://github.com/ros/diagnostics.git
+- release repository: https://github.com/ros2-gbp/diagnostics-release.git
+- rosdistro version: `2.1.2-1`
+- old version: `2.1.2-1`
+- new version: `2.1.3-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.20.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## diagnostics (galactic) - 2.1.3-1
 
 The packages in the `diagnostics` repository were released into the `galactic` distro by running `/Users/karsten/.pyenv/versions/3.8.0/bin/bloom-release -r galactic diagnostics` on `Tue, 03 Aug 2021 22:24:41 -0000`
