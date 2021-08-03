@@ -43,6 +43,7 @@
 #include "diagnostic_msgs/msg/diagnostic_array.hpp"
 #include "diagnostic_updater/update_functions.hpp"
 
+#include "rclcpp/clock.hpp"
 #include "rclcpp/publisher.hpp"
 #include "rclcpp/subscription.hpp"
 
@@ -140,14 +141,18 @@ public:
    *
    * \param stamp The parameters for the TimeStampStatus class that will be
    * computing statistics.
+   *
+   * \param clock Pointer to a clock instance. If not provided, the default
+   * one will be used
    */
 
   TopicDiagnostic(
     std::string name, diagnostic_updater::Updater & diag,
     const diagnostic_updater::FrequencyStatusParam & freq,
-    const diagnostic_updater::TimeStampStatusParam & stamp)
+    const diagnostic_updater::TimeStampStatusParam & stamp,
+    const rclcpp::Clock::SharedPtr & clock = std::make_shared<rclcpp::Clock>())
   : HeaderlessTopicDiagnostic(name, diag, freq),
-    stamp_(stamp),
+    stamp_(stamp, clock),
     error_logger_(rclcpp::get_logger("TopicDiagnostic_error_logger"))
   {
     addTask(&stamp_);
@@ -165,7 +170,7 @@ public:
   {
     std::string error_msg = "tick(void) has been called on a TopicDiagnostic.";
     error_msg += " This is never correct. Use tick(rclcpp::Time &) instead.";
-    RCLCPP_FATAL(error_logger_, "%s", error_msg.c_str());
+    RCLCPP_FATAL(error_logger_, error_msg);
   }
 
   /**
