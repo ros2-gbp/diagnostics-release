@@ -1,0 +1,13 @@
+Source: ros-rolling-diagnostic-updater
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ament-cmake-gtest, ros-rolling-ament-cmake-pytest, ros-rolling-ament-cmake-python, ros-rolling-ament-lint-auto, ros-rolling-ament-lint-common, ros-rolling-diagnostic-msgs, ros-rolling-rclcpp, ros-rolling-rclcpp-lifecycle, ros-rolling-rclpy, ros-rolling-std-msgs, ros-rolling-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_updater
+Standards-Version: 3.9.2
+
+Package: ros-rolling-diagnostic-updater
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-rolling-diagnostic-msgs, ros-rolling-rclcpp, ros-rolling-rclpy, ros-rolling-std-msgs, ros-rolling-ros-workspace
+Description: diagnostic_updater contains tools for easily updating diagnostics.
+ it is commonly used in device drivers to keep track of the status of output topics, device status, etc.
