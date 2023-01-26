@@ -1,3 +1,31 @@
+## diagnostics (foxy) - 3.1.0-1
+
+The packages in the `diagnostics` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --rosdistro foxy --track foxy diagnostics --edit` on `Thu, 26 Jan 2023 17:40:22 -0000`
+
+These packages were released:
+- `diagnostic_aggregator`
+- `diagnostic_common_diagnostics`
+- `diagnostic_updater`
+- `diagnostics`
+- `self_test`
+
+Version of package(s) in repository `diagnostics`:
+
+- upstream repository: https://github.com/ros/diagnostics.git
+- release repository: https://github.com/ros2-gbp/diagnostics-release.git
+- rosdistro version: `2.0.8-2`
+- old version: `2.0.8-2`
+- new version: `3.1.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.22.1`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## diagnostics (rolling) - 3.1.0-1
 
 The packages in the `diagnostics` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling diagnostics --edit` on `Thu, 26 Jan 2023 17:33:16 -0000`
