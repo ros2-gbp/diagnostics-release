@@ -1,0 +1,12 @@
+Source: ros-foxy-diagnostic-common-diagnostics
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-foxy-ament-cmake, ros-foxy-ament-cmake-lint-cmake <!nocheck>, ros-foxy-ament-cmake-python, ros-foxy-ament-cmake-xmllint <!nocheck>, ros-foxy-ament-lint-auto <!nocheck>, ros-foxy-ros-workspace
+Homepage: http://ros.org/wiki/diagnostic_common_diagnostics
+Standards-Version: 3.9.2
+
+Package: ros-foxy-diagnostic-common-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ntpdate, ros-foxy-diagnostic-updater, ros-foxy-rclpy, ros-foxy-ros-workspace
+Description: diagnostic_common_diagnostics
