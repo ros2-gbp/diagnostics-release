@@ -2,6 +2,53 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2023-01-26)
+------------------
+* Merge of foxy and humble history into rolling for future maintenance from one branch only.
+* Adding READMEs to the repo (`#270 <https://github.com/ros/diagnostics/issues/270>`_)
+* License fixes (`#263 <https://github.com/ros/diagnostics/issues/263>`_)
+* Fix/cleanup ros1 (`#257 <https://github.com/ros/diagnostics/issues/257>`_)
+* Fixed DiagnosedPublisher and switched to ROS_TIME (`#243 <https://github.com/ros/diagnostics/issues/243>`_)
+* Check if parameter is already declared to avoid re-declaring it. (`#227 <https://github.com/ros/diagnostics/issues/227>`_)
+* Update CMakeLists.txt to support modern cmake syntax
+* Fix diagnostic_updater cmake
+* Fix implicit conversion warnings
+* Contributors: Alberto Soragna, Austin, Christian Henkel, Grzegorz Głowacki, Nikos Koukis, Ralph Lange
+
+3.0.0 (2022-06-10)
+------------------
+* Merge pull request `#217 <https://github.com/ros/diagnostics/issues/217>`_ from boschresearch/ros-time-for-frequency-stat
+* Allow clock instance to be set from outside in FrequencyStatus
+* Use node clock for diagnostic_aggregator and diagnostic_updater (`#210 <https://github.com/ros/diagnostics/issues/210>`_)
+* Use DiagnosticStatus.msg values instead of creating bytes manually (`#193 <https://github.com/ros/diagnostics/issues/193>`_)
+* Contributors: Arne Nordmann, BasVolkers, Kenji Miyake, Marco Lampacrescia
+
+2.1.3 (2021-08-03)
+------------------
+* Time Diagnostics can be used with Simulated Time. (`#201 <https://github.com/ros/diagnostics/issues/201>`_)
+* Contributors: Marco Lampacrescia
+
+2.1.2 (2021-03-03)
+------------------
+* Replace every byte creation instance. (`#184 <https://github.com/ros/diagnostics/issues/184>`_)
+* Enable multiple tasks publishing for diagnostic updater. (`#182 <https://github.com/ros/diagnostics/issues/182>`_)
+* Contributors: BasVolkers
+
+2.1.1 (2021-01-28)
+------------------
+
+2.1.0 (2021-01-12)
+------------------
+* Update to latest ros2 rolling. (`#177 <https://github.com/ros/diagnostics/issues/177>`_)
+* Contributors: Karsten Knese
+2.0.9 (2022-11-12)
+------------------
+* Check if parameter is already declared to avoid re-declaring it. (#227)
+* Fix implicit conversion warnings
+* Use node clock in FrequencyStatus diagnostic
+* Allow clock instance to be set from outside in FrequencyStatus
+* Contributors: Arne Nordmann, Grzegorz Głowacki, Marco Lampacrescia, Nikos Koukis, Ralph Lange
+
 2.0.8 (2021-08-03)
 ------------------
 * [ROS2] Time Diagnostics can be used with Simulated Time (`#201 <https://github.com/ros/diagnostics/issues/201>`_) (`#205 <https://github.com/ros/diagnostics/issues/205>`_)
