@@ -120,16 +120,6 @@ public:
   DIAGNOSTIC_AGGREGATOR_PUBLIC
   void publishData();
 
-  /*!
-   *\brief True if the NodeHandle reports OK
-   */
-  bool ok() const {return rclcpp::ok();}
-
-  /*!
-   *\brief Publish rate defaults to 1Hz, but can be set with ~pub_rate param
-   */
-  double getPubRate() const {return pub_rate_;}
-
   DIAGNOSTIC_AGGREGATOR_PUBLIC
   rclcpp::Node::SharedPtr get_node() const;
 
@@ -137,6 +127,7 @@ private:
   rclcpp::Node::SharedPtr n_;
 
   rclcpp::Logger logger_;
+  rclcpp::TimerBase::SharedPtr publish_timer_;
 
   /// AddDiagnostics, /diagnostics_agg/add_diagnostics
   rclcpp::Service<diagnostic_msgs::srv::AddDiagnostics>::SharedPtr add_srv_;
@@ -148,6 +139,7 @@ private:
   rclcpp::Publisher<diagnostic_msgs::msg::DiagnosticStatus>::SharedPtr toplevel_state_pub_;
   std::mutex mutex_;
   double pub_rate_;
+  int history_depth_;
   rclcpp::Clock::SharedPtr clock_;
 
   /*!

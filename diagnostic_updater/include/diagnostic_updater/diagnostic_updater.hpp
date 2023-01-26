@@ -366,6 +366,7 @@ public:
   explicit Updater(NodeT node, double period = 1.0)
   : Updater(
       node->get_node_base_interface(),
+      node->get_node_clock_interface(),
       node->get_node_logging_interface(),
       node->get_node_parameters_interface(),
       node->get_node_timers_interface(),
@@ -375,6 +376,7 @@ public:
 
   Updater(
     std::shared_ptr<rclcpp::node_interfaces::NodeBaseInterface> base_interface,
+    std::shared_ptr<rclcpp::node_interfaces::NodeClockInterface> clock_interface,
     std::shared_ptr<rclcpp::node_interfaces::NodeLoggingInterface> logging_interface,
     std::shared_ptr<rclcpp::node_interfaces::NodeParametersInterface> parameters_interface,
     std::shared_ptr<rclcpp::node_interfaces::NodeTimersInterface> timers_interface,
@@ -383,8 +385,8 @@ public:
   : verbose_(false),
     base_interface_(base_interface),
     timers_interface_(timers_interface),
-    clock_(std::make_shared<rclcpp::Clock>(RCL_ROS_TIME)),
-    period_(static_cast<rcl_duration_value_t>(period * 1e9)),
+    clock_(clock_interface->get_clock()),
+    period_(rclcpp::Duration::from_seconds(period)),
     publisher_(
       rclcpp::create_publisher<diagnostic_msgs::msg::DiagnosticArray>(
         topics_interface, "/diagnostics", 1)),
@@ -392,9 +394,16 @@ public:
     node_name_(base_interface->get_name()),
     warn_nohwid_done_(false)
   {
-    period = parameters_interface->declare_parameter(
-      "diagnostic_updater.period", rclcpp::ParameterValue(period)).get<double>();
-    period_ = rclcpp::Duration(static_cast<rcl_duration_value_t>(period * 1e9));
+    constexpr const char * period_param_name = "diagnostic_updater.period";
+    rclcpp::ParameterValue period_param;
+    if (parameters_interface->has_parameter(period_param_name)) {
+      period_param = parameters_interface->get_parameter(period_param_name).get_parameter_value();
+    } else {
+      period_param = parameters_interface->declare_parameter(
+        period_param_name, rclcpp::ParameterValue(period));
+    }
+    period = period_param.get<double>();
+    period_ = rclcpp::Duration::from_seconds(period);
 
     reset_timer();
   }
@@ -414,19 +423,11 @@ public:
   }
 
   /**
-   * \brief Sets the period as a rcl_duration_value_t
-   */
-  void setPeriod(rcl_duration_value_t period)
-  {
-    setPeriod(rclcpp::Duration(period));
-  }
-
-  /**
    * \brief Sets the period given a value in seconds
    */
   void setPeriod(double period)
   {
-    setPeriod(static_cast<rcl_duration_value_t>(period * 1e9));
+    setPeriod(rclcpp::Duration::from_seconds(period));
   }
 
   /**
@@ -447,7 +448,7 @@ public:
    *
    * \param msg Status message to output.
    */
-  void broadcast(int lvl, const std::string msg)
+  void broadcast(unsigned char lvl, const std::string msg)
   {
     std::vector<diagnostic_msgs::msg::DiagnosticStatus> status_vec;
 
@@ -539,7 +540,7 @@ private:
         error_msg += " For devices that do not have a HW_ID, set this value to 'none'.";
         error_msg += " This warning only occurs once all diagnostics are OK.";
         error_msg += " It is okay to wait until the device is open before calling setHardwareID.";
-        RCLCPP_WARN(logger_, error_msg);
+        RCLCPP_WARN(logger_, "%s", error_msg.c_str());
         warn_nohwid_done_ = true;
       }
 
@@ -582,7 +583,7 @@ private:
     }
     diagnostic_msgs::msg::DiagnosticArray msg;
     msg.status = status_vec;
-    msg.header.stamp = rclcpp::Clock().now();
+    msg.header.stamp = clock_->now();
     publisher_->publish(msg);
   }
 
