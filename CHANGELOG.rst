@@ -2,6 +2,44 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2023-01-26)
+------------------
+* Merge of foxy and humble history into rolling for future maintenance from one branch only.
+* Adding READMEs to the repo (`#270 <https://github.com/ros/diagnostics/issues/270>`_)
+* License fixes (`#263 <https://github.com/ros/diagnostics/issues/263>`_)
+* Fix/cleanup ros1 (`#257 <https://github.com/ros/diagnostics/issues/257>`_)
+* Use regex to search AnalyzerGroup
+* Contributors: Alberto Soragna, Austin, Christian Henkel, Keisuke Shima, Ralph Lange
+
+3.0.0 (2022-06-10)
+------------------
+* Use node clock for diagnostic_aggregator and diagnostic_updater (`#210 <https://github.com/ros/diagnostics/issues/210>`_)
+* Contributors: Kenji Miyake
+
+2.1.3 (2021-08-03)
+------------------
+
+2.1.2 (2021-03-03)
+------------------
+* Adapt new launch file syntax. (`#190 <https://github.com/ros/diagnostics/issues/190>`_)
+* Introduce history depth parameter for subscription. (`#168 <https://github.com/ros/diagnostics/issues/168>`_)
+* Contributors: Karsten Knese, Ryohsuke Mitsudome
+
+2.1.1 (2021-01-28)
+------------------
+* Move Aggregator publishing to timer to allow subscription callback more processing time. (`#180 <https://github.com/ros/diagnostics/issues/180>`_)
+* Contributors: cdbierl
+
+2.1.0 (2021-01-12)
+------------------
+* Update to latest ros2 rolling. (`#177 <https://github.com/ros/diagnostics/issues/177>`_)
+* Fix installation of diagnostic aggregator example. (`#159 <https://github.com/ros/diagnostics/issues/159>`_)
+* Restore alphabetical order. (`#148 <https://github.com/ros/diagnostics/issues/148>`_)
+* Aggregator bugfix, tests, and nicer example. (`#147 <https://github.com/ros/diagnostics/issues/147>`_)
+* Contributors: Arne Nordmann, Georg Bartels, Karsten Knese
+2.0.9 (2022-11-12)
+------------------
+
 2.0.8 (2021-08-03)
 ------------------
 
