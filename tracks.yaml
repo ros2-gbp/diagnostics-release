@@ -114,7 +114,7 @@ tracks:
       :{release_inc} --os-name fedora
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc} --os-name rhel
-    devel_branch: ros2-devel
+    devel_branch: ros2
     last_version: 3.0.0
     name: diagnostics
     patches: null
@@ -124,7 +124,7 @@ tracks:
     ros_distro: humble
     vcs_type: git
     vcs_uri: https://github.com/ros/diagnostics.git
-    version: :{auto}
+    version: :{ask}
   rolling:
     actions:
     - bloom-export-upstream :{vcs_local_uri} :{vcs_type} --tag :{release_tag} --display-uri
