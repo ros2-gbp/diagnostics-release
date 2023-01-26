@@ -2,6 +2,14 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.0 (2023-01-26)
+------------------
+* Adding READMEs to the repo (`#270 <https://github.com/ros/diagnostics/issues/270>`_)
+* License fixes (`#263 <https://github.com/ros/diagnostics/issues/263>`_)
+* Fix/cleanup ros1 (`#257 <https://github.com/ros/diagnostics/issues/257>`_)
+* Port ntp_monitor to ROS2 (`#242 <https://github.com/ros/diagnostics/issues/242>`_)
+* Contributors: Austin, Christian Henkel, RFRIEDM-Trimble, Ralph Lange
+
 1.9.3 (2018-05-02)
 ------------------
 
