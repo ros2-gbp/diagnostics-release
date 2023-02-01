@@ -1,3 +1,31 @@
+## diagnostics (rolling) - 3.1.0-2
+
+The packages in the `diagnostics` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling diagnostics` on `Wed, 01 Feb 2023 20:38:24 -0000`
+
+These packages were released:
+- `diagnostic_aggregator`
+- `diagnostic_common_diagnostics`
+- `diagnostic_updater`
+- `diagnostics`
+- `self_test`
+
+Version of package(s) in repository `diagnostics`:
+
+- upstream repository: https://github.com/ros/diagnostics.git
+- release repository: https://github.com/ros2-gbp/diagnostics-release.git
+- rosdistro version: `3.1.0-1`
+- old version: `3.1.0-1`
+- new version: `3.1.0-2`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.22.1`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## diagnostics (humble) - 3.1.0-2
 
 The packages in the `diagnostics` repository were released into the `humble` distro by running `/usr/bin/bloom-release --rosdistro humble --track humble diagnostics` on `Wed, 01 Feb 2023 20:33:14 -0000`
