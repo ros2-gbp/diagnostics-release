@@ -1,0 +1,13 @@
+Source: ros-humble-diagnostic-updater
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-humble-ament-cmake, ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-cmake-pytest <!nocheck>, ros-humble-ament-cmake-python, ros-humble-ament-lint-auto <!nocheck>, ros-humble-ament-lint-common <!nocheck>, ros-humble-diagnostic-msgs, ros-humble-rclcpp, ros-humble-rclcpp-lifecycle <!nocheck>, ros-humble-rclpy, ros-humble-std-msgs, ros-humble-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_updater
+Standards-Version: 3.9.2
+
+Package: ros-humble-diagnostic-updater
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-humble-diagnostic-msgs, ros-humble-rclcpp, ros-humble-rclpy, ros-humble-std-msgs, ros-humble-ros-workspace
+Description: diagnostic_updater contains tools for easily updating diagnostics.
+ it is commonly used in device drivers to keep track of the status of output topics, device status, etc.
