@@ -139,7 +139,7 @@ tracks:
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc} --os-name fedora
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
-      :{release_inc} --os-name rhel --skip-keys ntpdate
+      :{release_inc} --os-name rhel
     devel_branch: ros2
     last_version: 3.1.0
     name: diagnostics
