@@ -1,29 +1,36 @@
+General information about this repository, including legal information, build instructions and known issues/limitations, are given in [README.md](../README.md) in the repository root.
+
+# The self_test package
+This package can be used to implement self tests for ROS packages.
+
 # Overview
-The diagnostics system collects information about hardware drivers and robot hardware to make them availaible to users and operators. 
-The diagnostics system contains tools to collect and analyze this data.
+It publishes a service for the node to call to perform the self test.
+This then performs multiple user-defined checks on the node and reports the results.
 
-The diagnostics system is build around the `/diagnostics` topic. The topic is used for `diagnostic_msgs/DiagnosticArray` messages. 
-It contains information about the device names, status, and values. 
+# Example
+The file [selftest_example.cpp](src/selftest_example.cpp) contains an example of how to use the self_test package.
 
-It contains the following packages:
-- [`diagnostic_aggregator`](/diagnostic_aggregator/): Aggregates diagnostic messages from different sources into a single message.
-- [`diagnostic_analysis`](/diagnostics/): *Not ported to ROS2 yet* **#contributions-welcome**
-- [`diagnostic_common_diagnostics`](/diagnostic_common_diagnostics/): Predefined nodes for monitoring the Linux and ROS system.
-- [`diagnostic_updater`](/diagnostic_updater/): Base classes to publishing custom diagnostic messages for Python and C++.
-- [`self_test`](/self_test/): Tools to perform self tests on nodes.
+When we then call `$ ros2 run self_test run_selftest` we get the following output:
+```
+[INFO] [...] [...]: Self test FAILED for device with id: [12345]
+[INFO] [...] [...]: 1) Pretest
+[INFO] [...] [...]: 	Pretest completed successfully.
+[INFO] [...] [...]: 2) ID Lookup
+[INFO] [...] [...]: 	ID Lookup successful
+[INFO] [...] [...]: 3) Exception generating test
+[ERROR] [...] [...]: 	Uncaught exception: we did something that threw an exception
+[INFO] [...] [...]: 4) Value generating test
+[INFO] [...] [...]: 	We successfully changed the value.
+[INFO] [...] [...]: 	[some value] 42
+[INFO] [...] [...]: 5) Value testing test
+[INFO] [...] [...]: 	We observed the change in value
+```
 
-## Collecting diagnostic data
-At the points of interest, i.e. the hardware drivers, the diagnostic data is collected. 
-The data must be published on the `/diagnostics` topic.
-In the `diagnostic_updater` package, there are base classes to simplify the creation of diagnostic messages. 
+# C++ API
+The `TestRunner` class is the main class for self tests.
+It has a method `_add` which must be used to add the specific test as callback methods.
+The `TestRunner` then advertises the relevant `self_test` service and calls the aforemntioned callbacks when requested.
 
-## Aggregation
-The `diagnostic_aggregator` package provides tools to aggregate diagnostic messages from different sources into a single message. It has a plugin system to define the aggregation rules.
-
-## Visualization
-Outside of this repository, there is [`rqt_robot_monitor`](https://index.ros.org/p/rqt_robot_monitor/) to visualize diagnostic messages that have been aggregated by the `diagnostic_aggregator`.
-
-Diagnostics messages that are not aggregated can be visualized by [`rqt_runtime_monitor`](https://index.ros.org/p/rqt_runtime_monitor/).
-
-# License
-The source code is released under a [BSD 3-Clause license](LICENSE).
+# Nodes
+## run_selftest
+This node is used to call the self test service.
