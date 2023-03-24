@@ -2,6 +2,11 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.2 (2023-03-24)
+------------------
+* replacing ntpdate with ntplib (`#289 <https://github.com/ros/diagnostics/issues/289>`_)
+* Contributors: Christian Henkel
+
 3.1.1 (2023-03-16)
 ------------------
 * Secretly supporting galactic (`#295 <https://github.com/ros/diagnostics/issues/295>`_)
