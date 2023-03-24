@@ -1,3 +1,31 @@
+## diagnostics (foxy) - 3.1.2-1
+
+The packages in the `diagnostics` repository were released into the `foxy` distro by running `/home/hec2le/.local/bin/bloom-release -r foxy diagnostics` on `Fri, 24 Mar 2023 14:48:44 -0000`
+
+These packages were released:
+- `diagnostic_aggregator`
+- `diagnostic_common_diagnostics`
+- `diagnostic_updater`
+- `diagnostics`
+- `self_test`
+
+Version of package(s) in repository `diagnostics`:
+
+- upstream repository: https://github.com/ros/diagnostics.git
+- release repository: https://github.com/ros2-gbp/diagnostics-release.git
+- rosdistro version: `3.1.1-1`
+- old version: `3.1.1-1`
+- new version: `3.1.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.18.0`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## diagnostics (humble) - 3.1.2-1
 
 The packages in the `diagnostics` repository were released into the `humble` distro by running `/home/hec2le/.local/bin/bloom-release -r humble diagnostics` on `Fri, 24 Mar 2023 14:43:16 -0000`
