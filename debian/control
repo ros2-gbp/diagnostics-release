@@ -1,0 +1,12 @@
+Source: ros-humble-diagnostic-aggregator
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-humble-ament-cmake, ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-cmake-pytest <!nocheck>, ros-humble-ament-cmake-python, ros-humble-ament-lint-auto <!nocheck>, ros-humble-ament-lint-common <!nocheck>, ros-humble-diagnostic-msgs, ros-humble-launch-testing-ament-cmake <!nocheck>, ros-humble-launch-testing-ros <!nocheck>, ros-humble-pluginlib, ros-humble-rclcpp, ros-humble-rclpy, ros-humble-std-msgs, ros-humble-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_aggregator
+Standards-Version: 3.9.2
+
+Package: ros-humble-diagnostic-aggregator
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-humble-rclpy, ros-humble-ros-workspace
+Description: diagnostic_aggregator
