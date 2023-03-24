@@ -2,6 +2,9 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.2 (2023-03-24)
+------------------
+
 3.1.1 (2023-03-16)
 ------------------
 * exporting dependency on pluginlib fixes `#293 <https://github.com/ros/diagnostics/issues/293>`_ (`#294 <https://github.com/ros/diagnostics/issues/294>`_)
