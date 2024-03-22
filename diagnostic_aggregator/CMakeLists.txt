@@ -81,7 +81,8 @@ if(BUILD_TESTING)
   set(create_analyzers_tests
     "primitive_analyzers"
     "all_analyzers"
-    "analyzer_group")
+    "analyzer_group"
+    "empty_root_path")
 
   foreach(test_name ${create_analyzers_tests})
     file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/${test_name}.yaml" PARAMETER_FILE)
@@ -103,7 +104,8 @@ if(BUILD_TESTING)
   set(analyzers_output_tests
     "primitive_analyzers"
     "all_analyzers"
-    "analyzer_group")
+    "analyzer_group"
+    "empty_root_path")
 
   foreach(test_name ${create_analyzers_tests})
     file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/${test_name}.yaml" PARAMETER_FILE)
@@ -121,6 +123,16 @@ if(BUILD_TESTING)
       ENV
     )
   endforeach()
+
+  add_launch_test(
+    test/test_critical_pub.py
+    TIMEOUT 30
+  )
+
+  ament_add_pytest_test(test_discard_behavior
+    "${CMAKE_CURRENT_SOURCE_DIR}/test/test_discard_behavior.py"
+    TIMEOUT 60
+  )
 endif()
 
 install(
