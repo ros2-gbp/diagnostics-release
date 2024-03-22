@@ -2,7 +2,7 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.0.0 (2024-03-22)
+3.2.0 (2024-03-22)
 ------------------
 * Avoid rolling up an ERROR state when empty GenericAnalyzer blocks are marked discard_stale, or when all of their items are STALE. (`#315 <https://github.com/ros/diagnostics/issues/315>`_)
 * formatting fixes from PR324 (`#327 <https://github.com/ros/diagnostics/issues/327>`_)

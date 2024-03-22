@@ -34,9 +34,8 @@
 
 #include <diagnostic_updater/diagnostic_updater.hpp>
 #include <diagnostic_updater/publisher.hpp>
-#include <std_msgs/msg/bool.hpp>
 
-#include "rclcpp/rclcpp.hpp"
+#include <std_msgs/msg/bool.hpp>
 
 using namespace std::chrono_literals;
 
