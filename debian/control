@@ -1,0 +1,12 @@
+Source: ros-rolling-diagnostic-common-diagnostics
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ament-cmake-lint-cmake <!nocheck>, ros-rolling-ament-cmake-pytest <!nocheck>, ros-rolling-ament-cmake-python, ros-rolling-ament-cmake-xmllint <!nocheck>, ros-rolling-ament-lint-auto <!nocheck>, ros-rolling-ros-workspace
+Homepage: http://ros.org/wiki/diagnostic_common_diagnostics
+Standards-Version: 3.9.2
+
+Package: ros-rolling-diagnostic-common-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3-ntplib, ros-rolling-diagnostic-updater, ros-rolling-rclpy, ros-rolling-ros-workspace
+Description: diagnostic_common_diagnostics
