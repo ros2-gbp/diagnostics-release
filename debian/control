@@ -1,0 +1,12 @@
+Source: ros-humble-self-test
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-environment, ros-humble-ament-cmake, ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-lint-auto <!nocheck>, ros-humble-ament-lint-common <!nocheck>, ros-humble-rclcpp, ros-humble-ros-workspace
+Homepage: http://www.ros.org/wiki/self_test
+Standards-Version: 3.9.2
+
+Package: ros-humble-self-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-humble-rclcpp, ros-humble-ros-workspace
+Description: self_test
