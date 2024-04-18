@@ -1,1 +1,1 @@
-{"base": "cd134b8", "parent": "debian/rolling/diagnostic_aggregator", "previous": "73f18ae", "trim": "", "trimbase": ""}
+{"base": "66822de", "parent": "debian/jazzy/diagnostic_aggregator", "previous": "d20713a", "trim": "", "trimbase": ""}
