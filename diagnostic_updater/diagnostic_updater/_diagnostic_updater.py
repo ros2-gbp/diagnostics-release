@@ -42,6 +42,7 @@ import threading
 
 from diagnostic_msgs.msg import DiagnosticArray
 from diagnostic_msgs.msg import DiagnosticStatus
+from rclpy.clock import Clock
 
 from ._diagnostic_status_wrapper import DiagnosticStatusWrapper
 
@@ -238,6 +239,7 @@ class Updater(DiagnosticTaskVector):
         self.node = node
         self.publisher = self.node.create_publisher(
             DiagnosticArray, '/diagnostics', 1)
+        self.clock = Clock()
         self.period_parameter = 'diagnostic_updater.period'
         self.__period = self.node.declare_parameter(
             self.period_parameter, period).value
@@ -246,19 +248,6 @@ class Updater(DiagnosticTaskVector):
         self.verbose = False
         self.hwid = ''
         self.warn_nohwid_done = False
-
-        self.use_fqn_parameter = 'diagnostic_updater.use_fqn'
-        if self.node.has_parameter(self.use_fqn_parameter):
-            self.__use_fqn = self.node.get_parameter(
-                self.use_fqn_parameter).value
-        else:
-            self.__use_fqn = self.node.declare_parameter(
-                self.use_fqn_parameter, False).value
-
-        if self.__use_fqn:
-            self.node_name = '/'.join([self.node.get_namespace(), self.node.get_name()])
-        else:
-            self.node_name = self.node.get_name()
 
     def update(self):
         """
@@ -284,13 +273,13 @@ class Updater(DiagnosticTaskVector):
 
                 status_vec.append(status)
 
-                if status.level != b'\x00':
+                if status.level:
                     warn_nohwid = False
 
-                if self.verbose and status.level != b'\x00':
+                if self.verbose and status.level:
                     self.node.get_logger().warn(
                         'Non-zero diagnostic status. Name: %s, status\
-                        %s: %s' % (status.name, str(status.level),
+                        %i: %s' % (status.name, status.level,
                                    status.message))
 
         if warn_nohwid and not self.warn_nohwid_done:
@@ -313,7 +302,7 @@ class Updater(DiagnosticTaskVector):
     def period(self, period):
         self.__period = period
         self.timer.reset()
-        self.timer = self.node.create_timer(self.__period, self.update)
+        self.timer = self.node.creat_timer(self.__period, self.udpate)
 
     def force_update(self):
         """Force sending out an update for all known DiagnosticStatus."""
@@ -361,11 +350,11 @@ class Updater(DiagnosticTaskVector):
         if not type(msg) is list:
             msg = [msg]
 
-        now = self.node.get_clock().now()
+        now = self.clock.now()
         da = DiagnosticArray()
         da.header.stamp = now.to_msg()  # Add timestamp for ROS 0.10
         for stat in msg:
-            stat.name = self.node_name + ': ' + stat.name
+            stat.name = self.node.get_name() + ': ' + stat.name
             db = DiagnosticStatus()
             db.name = stat.name
             db.message = stat.message
@@ -373,6 +362,7 @@ class Updater(DiagnosticTaskVector):
             db.values = stat.values
             db.level = stat.level
             da.status.append(db)
+
         self.publisher.publish(da)
 
     def addedTaskCallback(self, task):
