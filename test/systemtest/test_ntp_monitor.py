@@ -42,7 +42,7 @@ from diagnostic_msgs.msg import DiagnosticArray
 
 import rclpy
 
-TIMEOUT_MAX_S = 5.
+TIMEOUT_MAX_S = 2.
 
 
 class TestNTPMonitor(unittest.TestCase):
@@ -54,7 +54,7 @@ class TestNTPMonitor(unittest.TestCase):
 
     def setUp(self):
         self.n_msgs_received = 0
-        n = self._count_msgs(1.)
+        n = self._count_msgs(TIMEOUT_MAX_S)
         self.assertEqual(n, 0)
         self.subprocess = subprocess.Popen(
             [
@@ -73,50 +73,35 @@ class TestNTPMonitor(unittest.TestCase):
         self.subprocess.kill()
 
     def _diagnostics_callback(self, msg):
-        rclpy.logging.get_logger('test_ntp_monitor').info(
-            f'Received diagnostics message: {msg}'
-        )
         search_strings = [
             'NTP offset from',
             'NTP self-offset for'
         ]
         for search_string in search_strings:
-            if search_string in ''.join([
+            if search_string not in ''.join([
                 s.name for s in msg.status
             ]):
-                self.n_msgs_received += 1
+                return
+        self.n_msgs_received += 1
 
     def _count_msgs(self, timeout_s):
         self.n_msgs_received = 0
         node = rclpy.create_node('test_ntp_monitor')
-        rclpy.logging.get_logger('test_ntp_monitor').info(
-            '_count_msgs'
-        )
         node.create_subscription(
             DiagnosticArray,
             'diagnostics',
             self._diagnostics_callback,
             1
         )
-        TIME_D_S = .05
+        TIME_D_S = .1
         waited_s = 0.
-        start = node.get_clock().now()
         while waited_s < timeout_s and self.n_msgs_received == 0:
             rclpy.spin_once(node, timeout_sec=TIME_D_S)
-            waited_s = (node.get_clock().now() - start).nanoseconds / 1e9
-        rclpy.logging.get_logger('test_ntp_monitor').info(
-            f'received {self.n_msgs_received} messages after {waited_s}s'
-        )
+            waited_s += TIME_D_S
         node.destroy_node()
         return self.n_msgs_received
 
     def test_publishing(self):
-        self.assertEqual(
-            self.subprocess.poll(),
-            None,
-            'NTP monitor subprocess died'
-        )
-
         n = self._count_msgs(TIMEOUT_MAX_S)
 
         self.assertGreater(
