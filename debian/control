@@ -1,0 +1,13 @@
+Source: ros-jazzy-diagnostic-updater
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ament-cmake, ament-cmake-copyright <!nocheck>, ament-cmake-cppcheck <!nocheck>, ament-cmake-cpplint <!nocheck>, ament-cmake-flake8 <!nocheck>, ament-cmake-googletest <!nocheck>, ament-cmake-lint-cmake <!nocheck>, ament-cmake-pep257 <!nocheck>, ament-cmake-pytest <!nocheck>, ament-cmake-python, ament-cmake-uncrustify <!nocheck>, ament-cmake-xmllint <!nocheck>, ament-lint <!nocheck>, libdiagnostic-msgs-dev, libstd-msgs-dev, python3-diagnostic-msgs, python3-std-msgs, ros-diagnostic-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-lifecycle <!nocheck>, ros-jazzy-rclpy, ros-std-msgs, ros-jazzy-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_updater
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-diagnostic-updater
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdiagnostic-msgs-dev, libstd-msgs-dev, python3-diagnostic-msgs, python3-std-msgs, ros-diagnostic-msgs, ros-jazzy-rclcpp, ros-jazzy-rclpy, ros-std-msgs, ros-jazzy-ros-workspace
+Description: diagnostic_updater contains tools for easily updating diagnostics.
+ it is commonly used in device drivers to keep track of the status of output topics, device status, etc.
