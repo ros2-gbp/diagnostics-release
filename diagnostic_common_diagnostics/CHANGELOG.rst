@@ -2,6 +2,22 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.0.1 (2024-06-27)
+------------------
+* refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_ (`#367 <https://github.com/ros/diagnostics/issues/367>`_)
+* refactor(ram_monitor): ros2 port (`#338 <https://github.com/ros/diagnostics/issues/338>`_)
+* NTP monitor improvements (`#342 <https://github.com/ros/diagnostics/issues/342>`_)
+* Using ubuntu ntp server in systemtest (`#346 <https://github.com/ros/diagnostics/issues/346>`_)
+* Contributors: Christian Henkel, Rein Appeldoorn, Tony Najjar
+
+4.0.0 (2024-03-22)
+------------------
+* Port cpu_monitor to ROS2 (`#326 <https://github.com/ros/diagnostics/issues/326>`_)
+* Debugging instability introduced by `#317 <https://github.com/ros/diagnostics/issues/317>`_  (`#323 <https://github.com/ros/diagnostics/issues/323>`_)
+* not testing on foxy any more (`#310 <https://github.com/ros/diagnostics/issues/310>`_)
+* Iron support (`#304 <https://github.com/ros/diagnostics/issues/304>`_)
+* Contributors: Christian Henkel, Richard
+
 3.1.2 (2023-03-24)
 ------------------
 * replacing ntpdate with ntplib (`#289 <https://github.com/ros/diagnostics/issues/289>`_)
