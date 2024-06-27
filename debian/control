@@ -1,0 +1,12 @@
+Source: ros-iron-diagnostics
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-iron-ament-cmake, ros-iron-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostics
+Standards-Version: 3.9.2
+
+Package: ros-iron-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-iron-diagnostic-aggregator, ros-iron-diagnostic-common-diagnostics, ros-iron-diagnostic-updater, ros-iron-self-test, ros-iron-ros-workspace
+Description: diagnostics
