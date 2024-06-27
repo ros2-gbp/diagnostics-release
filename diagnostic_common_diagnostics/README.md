@@ -50,10 +50,43 @@ Disable self test.
 **To be ported**
 
 ## ram_monitor.py
-**To be ported**
+The `ram_monitor` module allows users to monitor the RAM usage of their system in real-time.
+It publishes the usage percentage in a diagnostic message.
+
+* Name of the node is "ram_monitor_" + hostname.
+* Uses the following args:
+  * warning_percentage: If the RAM usage is > warning_percentage, a WARN status will be published.
+  * window: the maximum length of the used collections.deque for queuing RAM readings.
+
+### Published Topics
+#### /diagnostics
+diagnostic_msgs/DiagnosticArray
+The diagnostics information.
+
+### Parameters
+#### warning_percentage
+(default: 90)
+warning percentage threshold.
+
+#### window
+(default: 1)
+Length of RAM readings queue.
 
 ## sensors_monitor.py
-**To be ported**
+The `sensors_monitor` module allows users to monitor the temperature, volt and fan speeds of their system in real-time.
+It uses the [`LM Sensors` package](https://packages.debian.org/sid/utils/lm-sensors) to get the data.
+
+* Name of the node is "sensors_monitor_" + hostname.
+
+### Published Topics
+#### /diagnostics
+diagnostic_msgs/DiagnosticArray
+The diagnostics information.
+
+### Parameters
+#### ignore_fans
+(default: false)
+Whether to ignore the fan speed.
 
 ## tf_monitor.py
 **To be ported**
