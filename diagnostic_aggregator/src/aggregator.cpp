@@ -59,46 +59,18 @@ using diagnostic_msgs::msg::DiagnosticStatus;
 Aggregator::Aggregator()
 : n_(std::make_shared<rclcpp::Node>(
       "analyzers", "",
-      rclcpp::NodeOptions().automatically_declare_parameters_from_overrides(true))),
+      rclcpp::NodeOptions().allow_undeclared_parameters(true).
+      automatically_declare_parameters_from_overrides(true))),
   logger_(rclcpp::get_logger("Aggregator")),
   pub_rate_(1.0),
   history_depth_(1000),
   clock_(n_->get_clock()),
-  base_path_("/")
+  base_path_(""),
+  critical_(false),
+  last_top_level_state_(DiagnosticStatus::STALE)
 {
   RCLCPP_DEBUG(logger_, "constructor");
-  bool other_as_errors = false;
-
-  std::map<std::string, rclcpp::Parameter> parameters;
-  if (!n_->get_parameters("", parameters)) {
-    RCLCPP_ERROR(logger_, "Couldn't retrieve parameters.");
-  }
-  RCLCPP_DEBUG(logger_, "Retrieved %zu parameter(s).", parameters.size());
-
-  for (const auto & param : parameters) {
-    if (param.first.compare("pub_rate") == 0) {
-      pub_rate_ = param.second.as_double();
-    } else if (param.first.compare("path") == 0) {
-      base_path_.append(param.second.as_string());
-    } else if (param.first.compare("other_as_errors") == 0) {
-      other_as_errors = param.second.as_bool();
-    } else if (param.first.compare("history_depth") == 0) {
-      history_depth_ = param.second.as_int();
-    }
-  }
-  RCLCPP_DEBUG(logger_, "Aggregator publication rate configured to: %f", pub_rate_);
-  RCLCPP_DEBUG(logger_, "Aggregator base path configured to: %s", base_path_.c_str());
-  RCLCPP_DEBUG(
-    logger_, "Aggregator other_as_errors configured to: %s", (other_as_errors ? "true" : "false"));
-
-  analyzer_group_ = std::make_unique<AnalyzerGroup>();
-  if (!analyzer_group_->init(base_path_, "", n_)) {
-    RCLCPP_ERROR(logger_, "Analyzer group for diagnostic aggregator failed to initialize!");
-  }
-
-  // Last analyzer handles remaining data
-  other_analyzer_ = std::make_unique<OtherAnalyzer>(other_as_errors);
-  other_analyzer_->init(base_path_);  // This always returns true
+  initAnalyzers();
 
   diag_sub_ = n_->create_subscription<DiagnosticArray>(
     "/diagnostics", rclcpp::SystemDefaultsQoS().keep_last(history_depth_),
@@ -111,6 +83,66 @@ Aggregator::Aggregator()
   publish_timer_ = n_->create_wall_timer(
     std::chrono::milliseconds(publish_rate_ms),
     std::bind(&Aggregator::publishData, this));
+
+  param_sub_ = n_->create_subscription<rcl_interfaces::msg::ParameterEvent>(
+    "/parameter_events", 1, std::bind(&Aggregator::parameterCallback, this, _1));
+}
+
+void Aggregator::parameterCallback(const rcl_interfaces::msg::ParameterEvent::SharedPtr msg)
+{
+  if (msg->node == "/" + std::string(n_->get_name())) {
+    if (msg->new_parameters.size() != 0) {
+      base_path_ = "";
+      initAnalyzers();
+    }
+  }
+}
+
+void Aggregator::initAnalyzers()
+{
+  bool other_as_errors = false;
+
+  std::map<std::string, rclcpp::Parameter> parameters;
+  if (!n_->get_parameters("", parameters)) {
+    RCLCPP_ERROR(logger_, "Couldn't retrieve parameters.");
+  }
+  RCLCPP_DEBUG(logger_, "Retrieved %zu parameter(s).", parameters.size());
+
+  for (const auto & param : parameters) {
+    if (param.first.compare("pub_rate") == 0) {
+      pub_rate_ = param.second.as_double();
+    } else if (param.first.compare("path") == 0) {
+      // Leading slash when path is not empty
+      if (!param.second.as_string().empty()) {
+        base_path_.append("/");
+      }
+      base_path_.append(param.second.as_string());
+    } else if (param.first.compare("other_as_errors") == 0) {
+      other_as_errors = param.second.as_bool();
+    } else if (param.first.compare("history_depth") == 0) {
+      history_depth_ = param.second.as_int();
+    } else if (param.first.compare("critical") == 0) {
+      critical_ = param.second.as_bool();
+    }
+  }
+  RCLCPP_DEBUG(logger_, "Aggregator publication rate configured to: %f", pub_rate_);
+  RCLCPP_DEBUG(logger_, "Aggregator base path configured to: %s", base_path_.c_str());
+  RCLCPP_DEBUG(
+    logger_, "Aggregator other_as_errors configured to: %s", (other_as_errors ? "true" : "false"));
+  RCLCPP_DEBUG(
+    logger_, "Aggregator critical publisher configured to: %s", (critical_ ? "true" : "false"));
+
+  {  // lock the mutex while analyzer_group_ and other_analyzer_ are being updated
+    std::lock_guard<std::mutex> lock(mutex_);
+    analyzer_group_ = std::make_unique<AnalyzerGroup>();
+    if (!analyzer_group_->init(base_path_, "", n_)) {
+      RCLCPP_ERROR(logger_, "Analyzer group for diagnostic aggregator failed to initialize!");
+    }
+
+    // Last analyzer handles remaining data
+    other_analyzer_ = std::make_unique<OtherAnalyzer>(other_as_errors);
+    other_analyzer_->init(base_path_);  // This always returns true
+  }
 }
 
 void Aggregator::checkTimestamp(const DiagnosticArray::SharedPtr diag_msg)
@@ -141,6 +173,7 @@ void Aggregator::diagCallback(const DiagnosticArray::SharedPtr diag_msg)
   checkTimestamp(diag_msg);
 
   bool analyzed = false;
+  bool immediate_report = false;
   {  // lock the whole loop to ensure nothing in the analyzer group changes during it.
     std::lock_guard<std::mutex> lock(mutex_);
     for (auto j = 0u; j < diag_msg->status.size(); ++j) {
@@ -154,7 +187,16 @@ void Aggregator::diagCallback(const DiagnosticArray::SharedPtr diag_msg)
       if (!analyzed) {
         other_analyzer_->analyze(item);
       }
+
+      // In case there is a degraded state, publish immediately
+      if (critical_ && item->getLevel() > last_top_level_state_) {
+        immediate_report = true;
+      }
     }
+  }
+
+  if (immediate_report) {
+    publishData();
   }
 }
 
@@ -213,6 +255,8 @@ void Aggregator::publishData()
     // have stale items but not all are stale
     diag_toplevel_state.level = DiagnosticStatus::ERROR;
   }
+  last_top_level_state_ = diag_toplevel_state.level;
+
   toplevel_state_pub_->publish(diag_toplevel_state);
 }
 
