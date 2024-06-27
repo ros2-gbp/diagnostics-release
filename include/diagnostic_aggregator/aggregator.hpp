@@ -133,6 +133,8 @@ private:
   rclcpp::Service<diagnostic_msgs::srv::AddDiagnostics>::SharedPtr add_srv_;
   /// DiagnosticArray, /diagnostics
   rclcpp::Subscription<diagnostic_msgs::msg::DiagnosticArray>::SharedPtr diag_sub_;
+  /// ParameterEvent, /parameter_events
+  rclcpp::Subscription<rcl_interfaces::msg::ParameterEvent>::SharedPtr param_sub_;
   /// DiagnosticArray, /diagnostics_agg
   rclcpp::Publisher<diagnostic_msgs::msg::DiagnosticArray>::SharedPtr agg_pub_;
   /// DiagnosticStatus, /diagnostics_toplevel_state
@@ -152,8 +154,28 @@ private:
 
   std::string base_path_; /**< \brief Prepended to all status names of aggregator. */
 
+  /*!
+   *\brief If true, aggregator will publish an error immediately after receiving.
+   */
+  bool critical_;
+
+  /*!
+   *\brief Store the last top level value to publish the critical error only once.
+   */
+  std::uint8_t last_top_level_state_;
+
   /// Records all ROS warnings. No warnings are repeated.
   std::set<std::string> ros_warnings_;
+
+  /*
+   *!\brief Checks for new parameters to trigger reinitialization of the AnalyzerGroup and OtherAnalyzer
+   */
+  void parameterCallback(const rcl_interfaces::msg::ParameterEvent::SharedPtr param_msg);
+
+  /*
+   *!\brief (re)initializes the AnalyzerGroup and OtherAnalyzer
+   */
+  void initAnalyzers();
 
   /*
    *!\brief Checks timestamp of message, and warns if timestamp is 0 (not set)

@@ -14,7 +14,7 @@ The robot has two of each, one on each side.
 The robot also 4 camera sensors, one left and one right and one in the front and one in the back.
 These are all the available diagnostic sources:
 
-``` 
+```
 /arms/left/motor
 /arms/right/motor
 /legs/left/motor
@@ -119,6 +119,9 @@ Additional parameters depend on the type of the analyzer.
 Any diagnostic item that is not matched by any analyzer will be published by an "Other" analyzer.
 Items created by the "Other" analyzer will go stale after 5 seconds.
 
+The `critical` parameter makes the aggregator react immediately to a degradation in diagnostic state.
+This is useful if the toplevel state is parsed by a watchdog for example.
+
 ## Launching
 You can launch the `aggregator_node` like this (see [example.launch.py.in](example/example.launch.py.in)):
 ``` python
@@ -131,6 +134,33 @@ You can launch the `aggregator_node` like this (see [example.launch.py.in](examp
         aggregator,
     ])
 ```
+
+You can add analyzers at runtime using the `add_analyzer` node like this (see [example.launch.py.in](example/example.launch.py.in)):
+```
+    add_analyzer = launch_ros.actions.Node(
+        package='diagnostic_aggregator',
+        executable='add_analyzer',
+        output='screen',
+        parameters=[add_analyzer_params_filepath])
+    return launch.LaunchDescription([
+        add_analyzer,
+    ])
+```
+This node updates the parameters of the `aggregator_node` by calling the service `/analyzers/set_parameters_atomically`.
+The `aggregator_node` will detect when a `parameter-event` has introduced new parameters to it.
+When this happens the `aggregator_node` will reload all analyzers based on its new set of parameters.
+Adding analyzers this way can be done at runtime and can be made conditional.
+
+In the example, `add_analyzer` will add an analyzer for diagnostics that are marked optional:
+``` yaml
+/**:
+  ros__parameters:
+    optional:
+      type: diagnostic_aggregator/GenericAnalyzer
+      path: Optional
+      startswith: [ '/optional' ]
+```
+This will move the `/optional/runtime/analyzer` diagnostic from the "Other" to  "Aggregation" where it will not go stale after 5 seconds and will be taken into account for the toplevel state.
 
 # Basic analyzers
 The `diagnostic_aggregator` package provides a few basic analyzers that you can use to aggregate your diagnostics.
