@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - ros2-humble
+      - ros2-iron
   schedule:
     # Run every week at 20:00 on Sunday
     - cron: "0 20 * * 0"
@@ -21,7 +21,7 @@ jobs:
             self_test,
           ]
         include:
-          - distro: humble
+          - distro: iron
             os: 22.04
     runs-on: ubuntu-latest
     container: ubuntu:${{ matrix.os }}
