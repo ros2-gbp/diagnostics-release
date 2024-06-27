@@ -47,7 +47,7 @@ ament_target_dependencies(
   "rcutils"
 )
 
-add_executable(selftest_example src/selftest_example.cpp)
+add_executable(selftest_example example/selftest_example.cpp)
 target_include_directories(selftest_example
   PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -66,6 +66,10 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+
+  list(APPEND AMENT_LINT_AUTO_EXCLUDE
+    ament_cmake_uncrustify  # Inconsistent between jammy and noble
+  )
 
   add_subdirectory(test)
 endif()
