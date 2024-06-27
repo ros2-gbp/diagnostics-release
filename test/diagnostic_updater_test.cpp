@@ -134,6 +134,42 @@ TEST(DiagnosticUpdater, testUpdaterAsNodeClassMember) {
   SUCCEED();
 }
 
+class SaveIfCalled : public diagnostic_updater::DiagnosticTask
+{
+public:
+  SaveIfCalled()
+  : DiagnosticTask("SaveIfCalled") {}
+
+  void run(diagnostic_updater::DiagnosticStatusWrapper & s)
+  {
+    s.summary(0, "Have been called!");
+    has_been_called_ = true;
+  }
+
+  bool has_been_called() const
+  {
+    return has_been_called_;
+  }
+
+private:
+  bool has_been_called_ = false;
+};
+
+
+TEST(DiagnosticUpdater, testCustomContext) {
+  auto context = std::make_shared<rclcpp::Context>();
+  context->init(0, nullptr, rclcpp::InitOptions());
+
+  auto node =
+    std::make_shared<rclcpp::Node>("CustomContextNode", rclcpp::NodeOptions().context(context));
+  diagnostic_updater::Updater updater(node);
+  SaveIfCalled save_if_called;
+  updater.add(save_if_called);
+  updater.force_update();
+  ASSERT_TRUE(save_if_called.has_been_called());
+  context->shutdown("End test");
+}
+
 TEST(DiagnosticUpdater, testDiagnosticStatusWrapperKeyValuePairs) {
   diagnostic_updater::DiagnosticStatusWrapper stat;
 
