@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - ros2-jazzy
+      - ros2
   schedule:
     # Run every week at 20:00 on Sunday
     - cron: "0 20 * * 0"
@@ -25,7 +25,7 @@ jobs:
             xmllint,
           ]
         include:
-          - distro: jazzy
+          - distro: rolling
             os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     env:
