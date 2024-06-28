@@ -114,7 +114,7 @@ tracks:
       :{release_inc} --os-name fedora
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc} --os-name rhel
-    devel_branch: ros2
+    devel_branch: ros2-humble
     last_version: 4.0.0
     name: diagnostics
     patches: null
@@ -140,7 +140,7 @@ tracks:
       :{release_inc} --os-name fedora
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc} --os-name rhel
-    devel_branch: ros2
+    devel_branch: ros2-iron
     last_version: 4.1.0
     name: diagnostics
     patches: null
@@ -166,7 +166,7 @@ tracks:
       :{release_inc} --os-name fedora
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc} --os-name rhel
-    devel_branch: ros2
+    devel_branch: ros2-jazzy
     last_version: 4.2.0
     name: diagnostics
     patches: null
