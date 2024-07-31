@@ -2,6 +2,11 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.2.1 (2024-07-30)
+------------------
+* Fix correctly exporting the library (`#388 <https://github.com/ros/diagnostics/issues/388>`_)
+* Contributors: Ramon Wijnands
+
 4.0.1 (2024-06-27)
 ------------------
 * change(diagnosed-publisher): allow specifying node clock (`#340 <https://github.com/ros/diagnostics/issues/340>`_) (`#372 <https://github.com/ros/diagnostics/issues/372>`_)
