@@ -2,6 +2,12 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.3.1 (2024-07-30)
+------------------
+* fixing pep257 problems introduced by `#334 <https://github.com/ros/diagnostics/issues/334>`_ (`#384 <https://github.com/ros/diagnostics/issues/384>`_)
+* Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_)
+* Contributors: Antoine Lima, Christian Henkel
+
 3.2.1 (2024-06-27)
 ------------------
 * refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_
