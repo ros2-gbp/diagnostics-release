@@ -2,6 +2,9 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.2.1 (2024-07-30)
+------------------
+
 4.0.1 (2024-06-27)
 ------------------
 * Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_) (`#361 <https://github.com/ros/diagnostics/issues/361>`_)
