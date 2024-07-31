@@ -2,6 +2,9 @@
 Changelog for package self_test
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.3.1 (2024-07-30)
+------------------
+
 3.2.1 (2024-06-27)
 ------------------
 * Building in docker (`#335 <https://github.com/ros/diagnostics/issues/335>`_)
