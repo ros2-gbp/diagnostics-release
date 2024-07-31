@@ -2,16 +2,16 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.3.1 (2024-07-30)
+4.2.1 (2024-07-30)
 ------------------
 
-3.2.1 (2024-06-27)
+4.0.1 (2024-06-27)
 ------------------
-* Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_)
-* Aggregator: publish diagnostics_toplevel_state immediately on every degradation (`#324 <https://github.com/ros/diagnostics/issues/324>`_)
-* Contributors: MartinCornelis2, Tim Clephas
+* Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_) (`#361 <https://github.com/ros/diagnostics/issues/361>`_)
+* Aggregator: publish diagnostics_toplevel_state immediately on every degradation (`#324 <https://github.com/ros/diagnostics/issues/324>`_) (`#357 <https://github.com/ros/diagnostics/issues/357>`_)
+* Contributors: Christian Henkel
 
-3.2.0 (2024-03-22)
+4.0.0 (2024-03-22)
 ------------------
 * Avoid rolling up an ERROR state when empty GenericAnalyzer blocks are marked discard_stale, or when all of their items are STALE. (`#315 <https://github.com/ros/diagnostics/issues/315>`_)
 * formatting fixes from PR324 (`#327 <https://github.com/ros/diagnostics/issues/327>`_)

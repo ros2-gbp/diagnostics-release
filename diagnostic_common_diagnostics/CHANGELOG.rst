@@ -2,22 +2,22 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.3.1 (2024-07-30)
+4.2.1 (2024-07-30)
 ------------------
-* fixing pep257 problems introduced by `#334 <https://github.com/ros/diagnostics/issues/334>`_ (`#384 <https://github.com/ros/diagnostics/issues/384>`_)
-* Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_)
-* Contributors: Antoine Lima, Christian Henkel
+* fixing pep257 problems introduced by `#334 <https://github.com/ros/diagnostics/issues/334>`_ (`#384 <https://github.com/ros/diagnostics/issues/384>`_) (`#392 <https://github.com/ros/diagnostics/issues/392>`_)
+* Fixing ntp launchtest (`#330 <https://github.com/ros/diagnostics/issues/330>`_) (`#391 <https://github.com/ros/diagnostics/issues/391>`_)
+* Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_) (`#383 <https://github.com/ros/diagnostics/issues/383>`_)
+* Contributors: Christian Henkel, Richardvdketterij, Richard
 
-3.2.1 (2024-06-27)
+4.0.1 (2024-06-27)
 ------------------
-* refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_
+* refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_ (`#367 <https://github.com/ros/diagnostics/issues/367>`_)
 * refactor(ram_monitor): ros2 port (`#338 <https://github.com/ros/diagnostics/issues/338>`_)
 * NTP monitor improvements (`#342 <https://github.com/ros/diagnostics/issues/342>`_)
 * Using ubuntu ntp server in systemtest (`#346 <https://github.com/ros/diagnostics/issues/346>`_)
-* Fixing ntp launchtest (`#330 <https://github.com/ros/diagnostics/issues/330>`_)
 * Contributors: Christian Henkel, Rein Appeldoorn, Tony Najjar
 
-3.2.0 (2024-03-22)
+4.0.0 (2024-03-22)
 ------------------
 * Port cpu_monitor to ROS2 (`#326 <https://github.com/ros/diagnostics/issues/326>`_)
 * Debugging instability introduced by `#317 <https://github.com/ros/diagnostics/issues/317>`_  (`#323 <https://github.com/ros/diagnostics/issues/323>`_)
