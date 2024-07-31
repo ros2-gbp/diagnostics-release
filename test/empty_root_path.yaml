@@ -1,6 +1,5 @@
 /**:
   ros__parameters:
-    path: TEST
     primary:
       type: 'diagnostic_aggregator/AnalyzerGroup'
       path: Group01
