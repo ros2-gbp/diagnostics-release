@@ -39,33 +39,6 @@ Diagnostics messages that are not aggregated can be visualized by [`rqt_runtime_
 - **Iron Irwini** by the [`ros2-iron` branch](https://github.com/ros/diagnostics/tree/ros2-iron)
 - **Jazzy Jalisco** by the [`ros2-jazzy` branch](https://github.com/ros/diagnostics/tree/ros2-jazzy)
 
-## Workflow
-
-New features are to be developed in custom branches and then merged into the `ros2` branch.
-
-From there, the changes are backported to the other branches.
-
-## Backport Tooling
-
-This tool has proven to be useful: [backport](https://www.npmjs.com/package/backport)
-
-Use this command to port a given PR of `PR_NUMBER` to the other branches:
-
-```bash
-backport --pr PR_NUMBER -b ros2-humble ros2-iron ros2-jazzy
-```
-
-# Versioning and Releases
-
-- (__X__.0.0) We use the major version number to indicate a breaking change.
-- (0.__Y__.0) The minor version number is used to differentiate between different ROS distributions:
-  - x.__0__.z: Humble Hawksbill
-  - x.__1__.z: Iron Irwini
-  - x.__2__.z: Jazzy Jalisco
-  - x.__3__.z: Rolling Ridley
-  - Future releases (Kilted Kaiju 05/25) will get x.__3__.z and _Rolling_ will be incremented accordingly.
-- (0.0.__Z__) The patch version number is used for changes in the current ROS distribution that do not affect the API.
-
 # License
 
 The source code is released under a [BSD 3-Clause license](LICENSE).
