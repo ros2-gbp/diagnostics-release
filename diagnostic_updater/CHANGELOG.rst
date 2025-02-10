@@ -2,6 +2,20 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.0.2 (2025-02-10)
+------------------
+* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#428 <https://github.com/ros/diagnostics/issues/428>`_)
+  Co-authored-by: Silvio Traversaro <silvio@traversaro.it>
+* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#414 <https://github.com/ros/diagnostics/issues/414>`_)
+  * skipping flaky ntp test
+* Contributors: Christian Henkel
+
+3.2.1 (2024-06-27)
+------------------
+* change(diagnosed-publisher): allow specifying node clock 
+* Fix usage of rclcpp::ok with a non-default context (`#352 <https://github.com/ros/diagnostics/issues/352>`_)
+* Contributors: Christian Henkel, Hervé Audren
+
 3.2.0 (2024-03-22)
 ------------------
 * including depdency (`#322 <https://github.com/ros/diagnostics/issues/322>`_)

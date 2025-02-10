@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - ros2-iron
+      - ros2-humble
   schedule:
     # Run every week at 20:00 on Sunday
     - cron: "0 20 * * 0"
@@ -23,7 +23,7 @@ jobs:
             xmllint,
           ]
         include:
-          - distro: iron
+          - distro: humble
             os: ubuntu-22.04
     runs-on: ${{ matrix.os }}
     env:
@@ -41,3 +41,10 @@ jobs:
             diagnostic_common_diagnostics
             diagnostic_updater
             self_test
+
+  check_licenses:
+    name: Check licenses
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: boschresearch/ros_license_toolkit@2.0.1
