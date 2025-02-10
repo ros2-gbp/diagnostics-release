@@ -1,219 +1,71 @@
-General information about this repository, including legal information and known issues/limitations, are given in [README.md](../README.md) in the repository root.
+[![Test diagnostics](https://img.shields.io/github/actions/workflow/status/ros/diagnostics/test.yaml?label=test&style=flat-square)](https://github.com/ros/diagnostics/actions/workflows/test.yaml) [![Lint diagnostics](https://img.shields.io/github/actions/workflow/status/ros/diagnostics/lint.yaml?label=lint&style=flat-square)](https://github.com/ros/diagnostics/actions/workflows/lint.yaml) [![ROS2 Humble](https://img.shields.io/ros/v/humble/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#humble) [![ROS2 Iron](https://img.shields.io/ros/v/iron/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#iron) [![ROS2 Jazzy](https://img.shields.io/ros/v/jazzy/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#jazzy) [![ROS2 Rolling](https://img.shields.io/ros/v/rolling/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#rolling)
 
-# The diagnostic_aggregator package
-This package contains the `aggregator_node`.
-It listens to the [`diagnostic_msgs/DiagnosticArray`](https://index.ros.org/p/diagnostic_msgs) messages on the `/diagnostics` topic and aggregates and published them on the `/diagnostics_agg` topic.
+# Overview
 
-One use case for this package is to aggregate the diagnostics of a robot.
-Aggregation means that the diagnostics of the robot are grouped by various aspects, like their location on the robot, their type, etc.
-This will allow you to easily see which part of the robot is causing problems.
+The diagnostics system collects information about hardware drivers and robot hardware to make them available to users and operators.
+The diagnostics system contains tools to collect and analyze this data.
 
-## Example
-In our example, we are looking at a robot with arms and legs.
-The robot has two of each, one on each side.
-The robot also 4 camera sensors, one left and one right and one in the front and one in the back.
-These are all the available diagnostic sources:
+The diagnostics system is build around the `/diagnostics` topic. The topic is used for `diagnostic_msgs/DiagnosticArray` messages.
+It contains information about the device names, status, and values.
 
-```
-/arms/left/motor
-/arms/right/motor
-/legs/left/motor
-/legs/right/motor
-/sensors/left/cam
-/sensors/right/cam
-/sensors/front/cam
-/sensors/rear/cam
-```
+It contains the following packages:
 
-We want to group the diagnostics by
-- all sensors
-- all motors
-- left side of the robot
-- right side of the robot
+- [`diagnostic_aggregator`](/diagnostic_aggregator/): Aggregates diagnostic messages from different sources into a single message.
+- [`diagnostic_analysis`](/diagnostics/): *Not ported to ROS2 yet* **#contributions-welcome**
+- [`diagnostic_common_diagnostics`](/diagnostic_common_diagnostics/): Predefined nodes for monitoring the Linux and ROS system.
+- [`diagnostic_updater`](/diagnostic_updater/): Base classes to publishing custom diagnostic messages for Python and C++.
+- [`self_test`](/self_test/): Tools to perform self tests on nodes.
 
-We can achieve that by creating a configuration file that looks like this (see [example_analyzers.yaml](example/example_analyzers.yaml)):
-``` yaml
-analyzers:
-  ros__parameters:
-    path: Aggregation
-    arms:
-      type: diagnostic_aggregator/GenericAnalyzer
-      path: Arms
-      startswith: [ '/arms' ]
-    legs:
-      type: diagnostic_aggregator/GenericAnalyzer
-      path: Legs
-      startswith: [ '/legs' ]
-    sensors:
-      type: diagnostic_aggregator/GenericAnalyzer
-      path: Sensors
-      startswith: [ '/sensors' ]
-    motors:
-      type: diagnostic_aggregator/GenericAnalyzer
-      path: Motors
-      contains: [ '/motor' ]
-    topology:
-      type: 'diagnostic_aggregator/AnalyzerGroup'
-      path: Topology
-      analyzers:
-        left:
-          type: diagnostic_aggregator/GenericAnalyzer
-          path: Left
-          contains: [ '/left' ]
-        right:
-          type: diagnostic_aggregator/GenericAnalyzer
-          path: Right
-          contains: [ '/right' ]
+## Collecting diagnostic data
+
+At the points of interest, i.e. the hardware drivers, the diagnostic data is collected.
+The data must be published on the `/diagnostics` topic.
+In the `diagnostic_updater` package, there are base classes to simplify the creation of diagnostic messages.
+
+## Aggregation
+
+The `diagnostic_aggregator` package provides tools to aggregate diagnostic messages from different sources into a single message. It has a plugin system to define the aggregation rules.
+
+## Visualization
+
+Outside of this repository, there is [`rqt_robot_monitor`](https://index.ros.org/p/rqt_robot_monitor/) to visualize diagnostic messages that have been aggregated by the `diagnostic_aggregator`.
+
+Diagnostics messages that are not aggregated can be visualized by [`rqt_runtime_monitor`](https://index.ros.org/p/rqt_runtime_monitor/).
+
+# Target Distribution
+
+- **Rolling Ridley** by the [`ros2` branch](https://github.com/ros/diagnostics/tree/ros2)
+- **Humble Hawksbill** by the [`ros2-humble` branch](https://github.com/ros/diagnostics/tree/ros2-humble)
+- **Iron Irwini** by the [`ros2-iron` branch](https://github.com/ros/diagnostics/tree/ros2-iron)
+- **Jazzy Jalisco** by the [`ros2-jazzy` branch](https://github.com/ros/diagnostics/tree/ros2-jazzy)
+
+## Workflow
+
+New features are to be developed in custom branches and then merged into the `ros2` branch.
+
+From there, the changes are backported to the other branches.
+
+## Backport Tooling
+
+This tool has proven to be useful: [backport](https://www.npmjs.com/package/backport)
+
+Use this command to port a given PR of `PR_NUMBER` to the other branches:
+
+```bash
+backport --pr PR_NUMBER -b ros2-humble ros2-iron ros2-jazzy
 ```
 
-Based on this configuration, the [rqt_robot_monitor](https://index.ros.org/p/rqt_robot_monitor) will display the diagnostics information in a well-arranged manner as follows:
-![doc/rqt_robot_monitor.png](doc/rqt_robot_monitor.png)
+# Versioning and Releases
 
-Note that it will also display the highest state per group to allow you to see at a glance which part of the robot is not working properly.
-For example in the above image, the left side of the robot is not working properly, because the left camera is in the `ERROR` state.
+- (__X__.0.0) We use the major version number to indicate a breaking change.
+- (0.__Y__.0) The minor version number is used to differentiate between different ROS distributions:
+  - x.__0__.z: Humble Hawksbill
+  - x.__1__.z: Iron Irwini
+  - x.__2__.z: Jazzy Jalisco
+  - x.__3__.z: Rolling Ridley
+  - Future releases (Kilted Kaiju 05/25) will get x.__3__.z and _Rolling_ will be incremented accordingly.
+- (0.0.__Z__) The patch version number is used for changes in the current ROS distribution that do not affect the API.
 
-# Analyzers
-The `aggregator_node` will load analyzers to process the diagnostics data.
-An analyzer is a plugin that inherits from the [`diagnostic_aggregator::Analyzer`](include/diagnostic_aggregator/analyzer.hpp) class.
-Analyzers must be implemented in packages that directly depend on [`pluginlib`](https://index.ros.org/p/pluginlib) and `diagnostic_aggregator`.
+# License
 
-The [`diagnostic_aggregator::Analyzer`](include/diagnostic_aggregator/analyzer.hpp) class is purely virtual and derived classes must implement the following methods:
-
-- `init()` - Analyzer is initialized with base path and namespace
-- `match()` - Returns true if the analyzer is interested in the status message
-- `analyze()` - Returns true if the analyzer will analyze the status message
-- `report()` - Returns results of analysis as vector of status messages
-- `getPath()` - Returns the prefix path of the analyzer (e.g., "/robot/motors/")
-- `getName()` - Returns the name of the analyzer (e.g., "Motors")
-
-Analyzers can choose the value of the error level of their output.
-Usually, the error level of the output is the highest error level of the input.
-The analyzers are responsible for setting the name of each item in the output correctly.
-
-# Using the aggregator_node
-
-## Configuration
-
-The `aggregator_node` can be configured at launch time like in this example:
-``` yaml
-pub_rate: 1.0 # Optional, defaults to 1.0
-base_path: 'PRE' # Optional, defaults to ""
-analyzers:
-  motors:
-    type: PR2MotorsAnalyzer
-  joints:
-    type: GenericAnalyzer
-    path: 'Joints'
-    regex: 'Joint*'
-```
-
-The `pub_rate` parameter is the rate at which the aggregated diagnostics will be published.
-The `base_path` parameter is the prefix that will be added to the name of each item in the output.
-
-Under the `analyzers` key, you can specify the analyzers that you want to use.
-Each analyzer must have a unique name.
-Under the name, you must specify the type of the analyzer.
-This must be the name of the class that implements the analyzer.
-Additional parameters depend on the type of the analyzer.
-
-Any diagnostic item that is not matched by any analyzer will be published by an "Other" analyzer.
-Items created by the "Other" analyzer will go stale after 5 seconds.
-
-The `critical` parameter makes the aggregator react immediately to a degradation in diagnostic state.
-This is useful if the toplevel state is parsed by a watchdog for example.
-
-## Launching
-You can launch the `aggregator_node` like this (see [example.launch.py.in](example/example.launch.py.in)):
-``` python
-    aggregator = launch_ros.actions.Node(
-        package='diagnostic_aggregator',
-        executable='aggregator_node',
-        output='screen',
-        parameters=[analyzer_params_filepath])
-    return launch.LaunchDescription([
-        aggregator,
-    ])
-```
-
-You can add analyzers at runtime using the `add_analyzer` node like this (see [example.launch.py.in](example/example.launch.py.in)):
-```
-    add_analyzer = launch_ros.actions.Node(
-        package='diagnostic_aggregator',
-        executable='add_analyzer',
-        output='screen',
-        parameters=[add_analyzer_params_filepath])
-    return launch.LaunchDescription([
-        add_analyzer,
-    ])
-```
-This node updates the parameters of the `aggregator_node` by calling the service `/analyzers/set_parameters_atomically`.
-The `aggregator_node` will detect when a `parameter-event` has introduced new parameters to it.
-When this happens the `aggregator_node` will reload all analyzers based on its new set of parameters.
-Adding analyzers this way can be done at runtime and can be made conditional.
-
-In the example, `add_analyzer` will add an analyzer for diagnostics that are marked optional:
-``` yaml
-/**:
-  ros__parameters:
-    optional:
-      type: diagnostic_aggregator/GenericAnalyzer
-      path: Optional
-      startswith: [ '/optional' ]
-```
-This will move the `/optional/runtime/analyzer` diagnostic from the "Other" to  "Aggregation" where it will not go stale after 5 seconds and will be taken into account for the toplevel state.
-
-# Basic analyzers
-The `diagnostic_aggregator` package provides a few basic analyzers that you can use to aggregate your diagnostics.
-
-## GenericAnalyzer
-The [`diagnostic_aggregator::GenericAnalyzer`](include/diagnostic_aggregator/generic_analyzer.hpp) class is a basic analyzer that can be configured to match diagnostics based on their name.
-By defining a `path` parameter, you can specify the prefix that will be added to the name of each item in the output.
-This way you can group diagnostics by their location or other aspects as demonstrated in the [example](#example).
-
-## AnalyzerGroup
-The [`diagnostic_aggregator::AnalyzerGroup`](include/diagnostic_aggregator/analyzer_group.hpp) class is a basic analyzer that can be configured to group other analyzers.
-It has itself an `analyzers` parameter that can be filled with other analyzers to group them.
-
-An example of this is (see [example_analyzers.yaml](diagnostic_aggregator/example/example_analyzers.yaml)):
-``` yaml
-    topology:
-      type: 'diagnostic_aggregator/AnalyzerGroup'
-      path: Topology
-      analyzers:
-        left:
-          type: diagnostic_aggregator/GenericAnalyzer
-          path: Left
-          contains: [ '/left' ]
-        right:
-          type: diagnostic_aggregator/GenericAnalyzer
-          path: Right
-          contains: [ '/right' ]
-```
-
-## DiscardAnalyzer
-The [`diagnostic_aggregator::DiscardAnalyzer`](include/diagnostic_aggregator/discard_analyzer.hpp) class is a basic analyzer that discards all diagnostics that match it.
-This can be useful if you want to ignore some diagnostics.
-
-## IgnoreAnalyzer
-The [`diagnostic_aggregator::IgnoreAnalyzer`](include/diagnostic_aggregator/ignore_analyzer.hpp) will ignore all parameters in its namespace and not match anything.
-
-The difference between the `DiscardAnalyzer` and the `IgnoreAnalyzer` is that the `DiscardAnalyzer` will match diagnostics and discard them, while the `IgnoreAnalyzer` will not match anything.
-This means that things that are ignored by the `IgnoreAnalyzer` will still be published in the "Other" analyzer, while things that are discarded by the `DiscardAnalyzer` will not be published at all.
-
-# ROS API
- ## `aggregator_node`
-
-### Subscribed Topics
-- `diagnostics` ([diagnostic_msgs/DiagnosticArray](https://index.ros.org/p/diagnostic_msgs)) - The diagnostics to be aggregated
-
-### Published Topics
-- `diagnostics_agg` ([diagnostic_msgs/DiagnosticArray](https://index.ros.org/p/diagnostic_msgs)) - The aggregated diagnostics
-- `diagnostics_toplevel_state` ([diagnostic_msgs/DiagnosticStatus](https://index.ros.org/p/diagnostic_msgs)) - The highest state of the aggregated diagnostics
-
-### Parameters
-- `pub_rate` (double, default: 1.0) - The rate at which the aggregated diagnostics will be published
-- `base_path` (string, default: "") - The prefix that will be added to the name of each item in the output
-- `analyzers` (map, default: {}) - The analyzers that will be used to aggregate the diagnostics
-
-# Tutorials
-TODO: Port tutorials #contributions-welcome
+The source code is released under a [BSD 3-Clause license](LICENSE).
