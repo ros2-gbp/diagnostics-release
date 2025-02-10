@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - ros2-jazzy
+      - ros2
   schedule:
     # Run every week at 20:00 on Sunday
     - cron: "0 20 * * 0"
@@ -21,9 +21,10 @@ jobs:
             self_test,
           ]
         include:
-          - distro: jazzy
-            os: ubuntu-24.04
-    runs-on: ${{ matrix.os }}
+          - distro: rolling
+            os: 24.04
+    runs-on: ubuntu-latest
+    container: ubuntu:${{ matrix.os }}
     steps:
       - uses: ros-tooling/setup-ros@master
         with:
