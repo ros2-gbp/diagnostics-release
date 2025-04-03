@@ -2,31 +2,28 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.2.2 (2025-02-10)
+4.0.2 (2025-02-10)
 ------------------
-* common_diagnostics cleaned hostname string (`#405 <https://github.com/ros/diagnostics/issues/405>`_) (`#421 <https://github.com/ros/diagnostics/issues/421>`_)
+* common_diagnostics cleaned hostname string (`#405 <https://github.com/ros/diagnostics/issues/405>`_) (`#419 <https://github.com/ros/diagnostics/issues/419>`_)
   * Hostnames are properly cleaned to only contain alphanumeric characters or underscore.
   Co-authored-by: sjusner <simon.jusner@knapp.com>
-* Add missing rclpy dependency to common_diagnostics to fix rosdoc2 output (`#402 <https://github.com/ros/diagnostics/issues/402>`_) (`#408 <https://github.com/ros/diagnostics/issues/408>`_)
+* Add missing rclpy dependency to common_diagnostics to fix rosdoc2 output (`#402 <https://github.com/ros/diagnostics/issues/402>`_) (`#406 <https://github.com/ros/diagnostics/issues/406>`_)
   Co-authored-by: R Kent James <kent@caspia.com>
+* [ros2-humble] Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_) (`#381 <https://github.com/ros/diagnostics/issues/381>`_)
+  * Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_)
+  Co-authored-by: Antoine Lima <7421319+limaanto@users.noreply.github.com>
 * Contributors: Christian Henkel
 
-4.2.1 (2024-07-30)
+3.2.1 (2024-06-27)
 ------------------
-* fixing pep257 problems introduced by `#334 <https://github.com/ros/diagnostics/issues/334>`_ (`#384 <https://github.com/ros/diagnostics/issues/384>`_) (`#392 <https://github.com/ros/diagnostics/issues/392>`_)
-* Fixing ntp launchtest (`#330 <https://github.com/ros/diagnostics/issues/330>`_) (`#391 <https://github.com/ros/diagnostics/issues/391>`_)
-* Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_) (`#383 <https://github.com/ros/diagnostics/issues/383>`_)
-* Contributors: Christian Henkel, Richardvdketterij, Richard
-
-4.0.1 (2024-06-27)
-------------------
-* refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_ (`#367 <https://github.com/ros/diagnostics/issues/367>`_)
+* refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_ (`#365 <https://github.com/ros/diagnostics/issues/365>`_)
 * refactor(ram_monitor): ros2 port (`#338 <https://github.com/ros/diagnostics/issues/338>`_)
-* NTP monitor improvements (`#342 <https://github.com/ros/diagnostics/issues/342>`_)
-* Using ubuntu ntp server in systemtest (`#346 <https://github.com/ros/diagnostics/issues/346>`_)
-* Contributors: Christian Henkel, Rein Appeldoorn, Tony Najjar
+* NTP monitor improvements (`#342 <https://github.com/ros/diagnostics/issues/342>`_) (`#350 <https://github.com/ros/diagnostics/issues/350>`_)
+* Using ubuntu ntp server in systemtest (`#346 <https://github.com/ros/diagnostics/issues/346>`_) (`#347 <https://github.com/ros/diagnostics/issues/347>`_)
+* Fixing ntp launchtest (`#330 <https://github.com/ros/diagnostics/issues/330>`_)
+* Contributors: Christian Henkel, Rein Appeldoorn
 
-4.0.0 (2024-03-22)
+3.2.0 (2024-03-22)
 ------------------
 * Port cpu_monitor to ROS2 (`#326 <https://github.com/ros/diagnostics/issues/326>`_)
 * Debugging instability introduced by `#317 <https://github.com/ros/diagnostics/issues/317>`_  (`#323 <https://github.com/ros/diagnostics/issues/323>`_)

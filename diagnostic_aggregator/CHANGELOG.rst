@@ -2,27 +2,26 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.2.2 (2025-02-10)
+4.0.2 (2025-02-10)
 ------------------
-* Checking licenses in CI (`#431 <https://github.com/ros/diagnostics/issues/431>`_) (`#434 <https://github.com/ros/diagnostics/issues/434>`_)
+* Checking licenses in CI (`#431 <https://github.com/ros/diagnostics/issues/431>`_) (`#432 <https://github.com/ros/diagnostics/issues/432>`_)
   * Checking licenses in ci
-* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#430 <https://github.com/ros/diagnostics/issues/430>`_)
+* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#428 <https://github.com/ros/diagnostics/issues/428>`_)
   Co-authored-by: Silvio Traversaro <silvio@traversaro.it>
-* Support custom `rclcpp::NodeOptions` (`#417 <https://github.com/ros/diagnostics/issues/417>`_) (`#424 <https://github.com/ros/diagnostics/issues/424>`_)
+* Support custom `rclcpp::NodeOptions` (`#417 <https://github.com/ros/diagnostics/issues/417>`_) (`#422 <https://github.com/ros/diagnostics/issues/422>`_)
+  * Support custom `rclcpp::NodeOptions`   This eases static composition of multiple ROS 2 nodes
   Co-authored-by: Patrick Roncagliolo <ronca.pat@gmail.com>
-* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#416 <https://github.com/ros/diagnostics/issues/416>`_)
+* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#414 <https://github.com/ros/diagnostics/issues/414>`_)
+  * skipping flaky ntp test
 * Contributors: Christian Henkel
 
-4.2.1 (2024-07-30)
+3.2.1 (2024-06-27)
 ------------------
-
-4.0.1 (2024-06-27)
-------------------
-* Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_) (`#361 <https://github.com/ros/diagnostics/issues/361>`_)
-* Aggregator: publish diagnostics_toplevel_state immediately on every degradation (`#324 <https://github.com/ros/diagnostics/issues/324>`_) (`#357 <https://github.com/ros/diagnostics/issues/357>`_)
+* Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_) (`#359 <https://github.com/ros/diagnostics/issues/359>`_)
+* Aggregator: publish diagnostics_toplevel_state immediately on every degradation (`#324 <https://github.com/ros/diagnostics/issues/324>`_) (`#355 <https://github.com/ros/diagnostics/issues/355>`_)
 * Contributors: Christian Henkel
 
-4.0.0 (2024-03-22)
+3.2.0 (2024-03-22)
 ------------------
 * Avoid rolling up an ERROR state when empty GenericAnalyzer blocks are marked discard_stale, or when all of their items are STALE. (`#315 <https://github.com/ros/diagnostics/issues/315>`_)
 * formatting fixes from PR324 (`#327 <https://github.com/ros/diagnostics/issues/327>`_)
