@@ -1,0 +1,264 @@
+ros-kilted-diagnostic-remote-logging (4.4.3-2noble) noble; urgency=high
+
+  * cleanup (#450 <https://github.com/ros/diagnostics/issues/450>)
+  * Grafana Integration (#425 <https://github.com/ros/diagnostics/issues/425>)
+    * First working version of remote_logging
+    * Added more error handling, and skipping values when new line is present in stat
+    * Changed default telegraf url to reflect the change to influxdb_v2_listener
+    * Made node composable and changed name to influx to better reflect use cases
+    * Added README
+    ---------
+    Co-authored-by: Daan Wijffels <mailto:dwijffels@lely.com>
+    Co-authored-by: Thiever Base <mailto:thiever@lely.com>
+    Co-authored-by: Christian Henkel <mailto:6976069+ct2034@users.noreply.github.com>
+  * Contributors: Christian Henkel, Daan Wijffels
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 03 Apr 2025 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (4.4.2-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Mon, 10 Feb 2025 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (4.3.1-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 30 Jul 2024 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (4.3.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 27 Jun 2024 19:08:00 -0000
+
+ros-kilted-diagnostic-remote-logging (3.2.1-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 27 Jun 2024 16:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (3.2.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Fri, 22 Mar 2024 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (3.1.2-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Fri, 24 Mar 2023 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (3.1.1-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 16 Mar 2023 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (3.1.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Mon, 30 Jan 2023 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (3.0.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Fri, 10 Jun 2022 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (2.1.3-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 03 Aug 2021 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (2.1.2-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 03 Mar 2021 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (2.1.1-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 28 Jan 2021 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (2.1.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 12 Jan 2021 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (2.0.2-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 03 Jun 2020 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (2.0.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 03 Sep 2019 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.9.3-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 02 May 2018 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.9.2-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Sun, 16 Jul 2017 01:34:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.9.1-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Sat, 15 Jul 2017 21:38:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.9.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 25 Apr 2017 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.10-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 14 Jun 2016 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.9-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 02 Mar 2016 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.8-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 06 Aug 2015 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.7-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Fri, 09 Jan 2015 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.6-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 10 Dec 2014 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.5-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 29 Jul 2014 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.4-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 24 Jul 2014 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.3-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 23 Apr 2014 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.2-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 08 Apr 2014 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.1-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Mon, 07 Apr 2014 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.8.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 03 Apr 2013 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.10-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Fri, 22 Feb 2013 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.9-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Fri, 14 Dec 2012 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.8-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 06 Dec 2012 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.7-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Sat, 10 Nov 2012 06:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.6-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 08 Nov 2012 05:32:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.5-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 08 Nov 2012 03:53:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.4-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Thu, 08 Nov 2012 02:18:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.3-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Sun, 04 Nov 2012 05:00:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.2-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Wed, 31 Oct 2012 03:31:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.1-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Tue, 30 Oct 2012 20:30:00 -0000
+
+ros-kilted-diagnostic-remote-logging (1.7.0-2noble) noble; urgency=high
+
+
+
+ -- Daan Wijffels <dwijffels@lely.com>  Mon, 29 Oct 2012 05:00:00 -0000
+
+
