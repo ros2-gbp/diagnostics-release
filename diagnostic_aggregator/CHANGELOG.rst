@@ -2,24 +2,24 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.0.2 (2025-02-10)
+4.4.2 (2025-02-10)
 ------------------
-* Checking licenses in CI (`#431 <https://github.com/ros/diagnostics/issues/431>`_) (`#432 <https://github.com/ros/diagnostics/issues/432>`_)
+* Checking licenses in CI (`#431 <https://github.com/ros/diagnostics/issues/431>`_)
   * Checking licenses in ci
-* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#428 <https://github.com/ros/diagnostics/issues/428>`_)
-  Co-authored-by: Silvio Traversaro <silvio@traversaro.it>
-* Support custom `rclcpp::NodeOptions` (`#417 <https://github.com/ros/diagnostics/issues/417>`_) (`#422 <https://github.com/ros/diagnostics/issues/422>`_)
-  * Support custom `rclcpp::NodeOptions`   This eases static composition of multiple ROS 2 nodes
-  Co-authored-by: Patrick Roncagliolo <ronca.pat@gmail.com>
-* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#414 <https://github.com/ros/diagnostics/issues/414>`_)
-  * skipping flaky ntp test
-* Contributors: Christian Henkel
+* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_)
+* Support custom `rclcpp::NodeOptions` (`#417 <https://github.com/ros/diagnostics/issues/417>`_)
+* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_)
+* Skipping flaky ntp test (`#409 <https://github.com/ros/diagnostics/issues/409>`_)
+* Contributors: Christian Henkel, Patrick Roncagliolo, Silvio Traversaro
+
+4.3.1 (2024-07-30)
+------------------
 
 3.2.1 (2024-06-27)
 ------------------
-* Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_) (`#359 <https://github.com/ros/diagnostics/issues/359>`_)
-* Aggregator: publish diagnostics_toplevel_state immediately on every degradation (`#324 <https://github.com/ros/diagnostics/issues/324>`_) (`#355 <https://github.com/ros/diagnostics/issues/355>`_)
-* Contributors: Christian Henkel
+* Add add_analyzer functionality (`#329 <https://github.com/ros/diagnostics/issues/329>`_)
+* Aggregator: publish diagnostics_toplevel_state immediately on every degradation (`#324 <https://github.com/ros/diagnostics/issues/324>`_)
+* Contributors: MartinCornelis2, Tim Clephas
 
 3.2.0 (2024-03-22)
 ------------------

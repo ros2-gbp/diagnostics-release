@@ -2,19 +2,23 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.0.2 (2025-02-10)
+4.4.2 (2025-02-10)
 ------------------
-* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#428 <https://github.com/ros/diagnostics/issues/428>`_)
-  Co-authored-by: Silvio Traversaro <silvio@traversaro.it>
-* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#414 <https://github.com/ros/diagnostics/issues/414>`_)
-  * skipping flaky ntp test
-* Contributors: Christian Henkel
+* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_)
+* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_)
+* Contributors: Christian Henkel, Silvio Traversaro
+
+4.3.1 (2024-07-30)
+------------------
+* Fix correctly exporting the library (`#388 <https://github.com/ros/diagnostics/issues/388>`_) (`#393 <https://github.com/ros/diagnostics/issues/393>`_)
+* Minimize header includes by moving impl to .cpp files (`#331 <https://github.com/ros/diagnostics/issues/331>`_) and Fix usage of rclcpp::ok with a non-default context (`#352 <https://github.com/ros/diagnostics/issues/352>`_)  (`#390 <https://github.com/ros/diagnostics/issues/390>`_)
+* Contributors: Christian Henkel, Ramon Wijnands, Hervé Audren
 
 3.2.1 (2024-06-27)
 ------------------
-* change(diagnosed-publisher): allow specifying node clock 
+* change(diagnosed-publisher): allow specifying node clock (`#340 <https://github.com/ros/diagnostics/issues/340>`_)
 * Fix usage of rclcpp::ok with a non-default context (`#352 <https://github.com/ros/diagnostics/issues/352>`_)
-* Contributors: Christian Henkel, Hervé Audren
+* Contributors: Hervé Audren, Rein Appeldoorn
 
 3.2.0 (2024-03-22)
 ------------------
