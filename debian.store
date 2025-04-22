@@ -1,1 +1,1 @@
-{"base": "8d4cd4a0", "parent": "debian/rolling/diagnostic_updater", "previous": "97cfd2ed", "trim": "", "trimbase": ""}
+{"base": "b8484cc4dc2b", "parent": "debian/kilted/diagnostic_updater", "previous": "028e2e7b1253", "trim": "", "trimbase": ""}
