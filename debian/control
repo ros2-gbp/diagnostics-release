@@ -1,0 +1,12 @@
+Source: ros-kilted-diagnostic-common-diagnostics
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake, ros-kilted-ament-cmake-lint-cmake <!nocheck>, ros-kilted-ament-cmake-pytest <!nocheck>, ros-kilted-ament-cmake-python, ros-kilted-ament-cmake-xmllint <!nocheck>, ros-kilted-ament-lint-auto <!nocheck>, ros-kilted-launch-testing-ament-cmake <!nocheck>, ros-kilted-ros-workspace
+Homepage: http://ros.org/wiki/diagnostic_common_diagnostics
+Standards-Version: 3.9.2
+
+Package: ros-kilted-diagnostic-common-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, lm-sensors, python3-ntplib, python3-psutil, ros-kilted-diagnostic-updater, ros-kilted-rclpy, ros-kilted-ros-workspace
+Description: diagnostic_common_diagnostics
