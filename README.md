@@ -1,81 +1,114 @@
-General information about this repository, including legal information and known issues/limitations, are given in [README.md](../README.md) in the repository root.
+[![Test diagnostics](https://img.shields.io/github/actions/workflow/status/ros/diagnostics/test.yaml?label=test&style=flat-square)](https://github.com/ros/diagnostics/actions/workflows/test.yaml) [![Lint diagnostics](https://img.shields.io/github/actions/workflow/status/ros/diagnostics/lint.yaml?label=lint&style=flat-square)](https://github.com/ros/diagnostics/actions/workflows/lint.yaml) [![ROS2 Humble](https://img.shields.io/ros/v/humble/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#humble) [![ROS2 Iron](https://img.shields.io/ros/v/iron/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#iron) [![ROS2 Jazzy](https://img.shields.io/ros/v/jazzy/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#jazzy) [![ROS2 Rolling](https://img.shields.io/ros/v/rolling/diagnostics.svg?style=flat-square)](https://index.ros.org/r/diagnostics/#rolling)
 
-# The diagnostic_remote_logging package
+# Overview
 
-This package provides the `influx` node, which listens to diagnostic messages and integrates with InfluxDB v2 for monitoring and visualization. Specifically, it subscribes to the [`diagnostic_msgs/DiagnosticArray`](https://index.ros.org/p/diagnostic_msgs) messages on the `/diagnostics_agg` topic and the [`diagnostic_msgs/DiagnosticStatus`](https://index.ros.org/p/diagnostic_msgs) messages on the `/diagnostics_toplevel_state` topic. The node processes these messages, sending their statistics and levels to an [`InfluxDB`](http://influxdb.com) database, enabling use with tools like [`Grafana`](https://grafana.com).
+The diagnostics system collects information about hardware drivers and robot hardware to make them available to users and operators.
+The diagnostics system contains tools to collect and analyze this data.
 
-As of now we only support InfluxDB v2, for support with older versions please use a proxy like [`Telegraf`](https://www.influxdata.com/time-series-platform/telegraf/). See section [Telegraf](#using-a-telegraf-proxy) for an example on how to setup.
+The diagnostics system is build around the `/diagnostics` topic. The topic is used for `diagnostic_msgs/DiagnosticArray` messages.
+It contains information about the device names, status, and values.
 
-## Node Configuration
+It contains the following packages:
 
-You can send data to [`InfluxDB`](http://influxdb.com) in two ways: directly to the database or via a proxy like [`Telegraf`](https://www.influxdata.com/time-series-platform/telegraf/). While both methods are valid, using a proxy is generally recommended due to the following benefits:
+- [`diagnostic_aggregator`](/diagnostic_aggregator/): Aggregates diagnostic messages from different sources into a single message.
+- [`diagnostic_analysis`](/diagnostics/): *Not ported to ROS2 yet* **#contributions-welcome**
+- [`diagnostic_common_diagnostics`](/diagnostic_common_diagnostics/): Predefined nodes for monitoring the Linux and ROS system.
+- [`diagnostic_updater`](/diagnostic_updater/): Base classes to publishing custom diagnostic messages for Python and C++.
+- [`self_test`](/self_test/): Tools to perform self tests on nodes.
 
-- **Efficient Data Transmission**: Telegraf aggregates multiple measurements and sends them in a single request, reducing bandwidth usage and minimizing database load.
-- **Enhanced Reliability**: Provides buffering in case of connection issues, ensuring no data is lost.
-- **Comprehensive Metric Collection**: Telegraf can send additional system metrics (e.g., RAM, CPU, network usage) with minimal configuration.
-- **Data Filtering and Transformation**: Supports preprocessing, such as filtering or transforming data, before sending it to InfluxDB.
+## Collecting diagnostic data
 
-To use either method, ensure you have a running instance of InfluxDB. The simplest way to set this up is through [`InfluxDB Cloud`](https://cloud2.influxdata.com/signup).
+At the points of interest, i.e. the hardware drivers, the diagnostic data is collected.
+The data must be published on the `/diagnostics` topic.
+In the `diagnostic_updater` package, there are base classes to simplify the creation of diagnostic messages.
 
-### Parameters
+## Aggregation
 
-The `influx` node supports several parameters. Below is an example configuration:
+The `diagnostic_aggregator` package provides tools to aggregate diagnostic messages from different sources into a single message. It has a plugin system to define the aggregation rules.
 
-```yaml
-/influx:
-  ros__parameters:
-    connection:
-      url: http://localhost:8086/api/v2/write
-      token:
-      bucket:
-      organization:
-    send:
-      agg: true
-      top_level_state: true
-```
+## Visualization
 
-- `send.agg`: Enables or disables subscription to the `/diagnostics_agg` topic.
-- `send.top_level_state`: Enables or disables subscription to the `/diagnostics_toplevel_state` topic.
+Outside of this repository, there is [`rqt_robot_monitor`](https://index.ros.org/p/rqt_robot_monitor/) to visualize diagnostic messages that have been aggregated by the `diagnostic_aggregator`.
 
-#### InfluxDB Configuration
+Diagnostics messages that are not aggregated can be visualized by [`rqt_runtime_monitor`](https://index.ros.org/p/rqt_runtime_monitor/).
 
-Set the following parameters in your configuration to match your InfluxDB instance:
+# Target Distribution
 
-- `connection.url`: The URL of your InfluxDB write API endpoint.
-- `connection.token`: Your InfluxDB authentication token.
-- `connection.bucket`: The target bucket in InfluxDB.
-- `connection.organization`: The name of your InfluxDB organization.
+- **Rolling Ridley** by the [`ros2` branch](https://github.com/ros/diagnostics/tree/ros2)
+- **Humble Hawksbill** by the [`ros2-humble` branch](https://github.com/ros/diagnostics/tree/ros2-humble)
+- **Jazzy Jalisco** by the [`ros2-jazzy` branch](https://github.com/ros/diagnostics/tree/ros2-jazzy)
+- **Kilted Kaiju** by the [`ros2-kilted` branch](https://github.com/ros/diagnostics/tree/ros2-kilted)
 
-### Starting the node
+## Workflow
 
-Afterward all configurations are set run the node with the following command:
+New features are to be developed in custom branches and then merged into the `ros2` branch.
+
+From there, the changes are backported to the other branches.
+
+## Backport Tooling
+
+This tool has proven to be useful: [backport](https://www.npmjs.com/package/backport)
+
+Use this command to port a given PR of `PR_NUMBER` to the other branches:
 
 ```bash
-ros2 run diagnostic_remote_logging influx --ros-args --params-file <path_to_yaml_file>
+backport --pr PR_NUMBER -b ros2-humble ros2-jazzy ros2-kilted
 ```
 
-## Using a Telegraf Proxy
+## Versioning and Releases
 
-To configure Telegraf as a proxy for InfluxDB:
+- (**X**.0.0) We use the major version number to indicate a breaking change.
+- (0.**Y**.0) The minor version number is used to differentiate between different ROS distributions:
+  - x.**0**.z: Humble Hawksbill
+  - x.**1**.z: Iron Irwini
+  - x.**2**.z: Jazzy Jalisco
+  - x.**3**.z: Kilted Kaiju
+  - x.**4**.z: Rolling Ridley
+  - (Future releases will receive x.**4**.z and rolling will then be x.**5**.z)
+- (0.0.**Z**) The patch version number is used for changes in the current ROS distribution that do not affect the API.
 
-1. Ensure Telegraf is set up to send data to your InfluxDB instance via its configuration file (`/etc/telegraf/telegraf.conf`). Check [this link](https://docs.influxdata.com/influxdb/cloud/write-data/no-code/use-telegraf/manual-config/) for an example.
-2. Add the following to the telegraf configuration file to enable the InfluxDB v2 listener:
+<!-- ## Buildfarm Statuses
 
-    ```toml
-    [[inputs.influxdb_v2_listener]]
-      service_address = ":8086"
-    ```
+### diagnostic_aggregator
 
-3. Update the `influx` node configuration to point to the appropriate URL. For example, if Telegraf is running on the same host as the `influx` node, the default `http://localhost:8086/api/v2/write` should work.
+|         | H | I | J | R |
+| ------- | - | - | - | - |
+| src, ubuntu | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_uJ__diagnostic_aggregator__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_uJ__diagnostic_aggregator__ubuntu_jammy__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_uJ__diagnostic_aggregator__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_uJ__diagnostic_aggregator__ubuntu_jammy__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_uN__diagnostic_aggregator__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_uN__diagnostic_aggregator__ubuntu_noble__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_uN__diagnostic_aggregator__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_uN__diagnostic_aggregator__ubuntu_noble__source) |
+| src, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_el8__diagnostic_aggregator__rhel_8__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_el8__diagnostic_aggregator__rhel_8__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_el9__diagnostic_aggregator__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_el9__diagnostic_aggregator__rhel_9__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_el9__diagnostic_aggregator__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_el9__diagnostic_aggregator__rhel_9__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_el9__diagnostic_aggregator__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_el9__diagnostic_aggregator__rhel_9__source) |
+| bin, ubuntu, amd64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__diagnostic_aggregator__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_uJ64__diagnostic_aggregator__ubuntu_jammy_amd64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_uJ64__diagnostic_aggregator__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_uJ64__diagnostic_aggregator__ubuntu_jammy_amd64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__diagnostic_aggregator__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_uN64__diagnostic_aggregator__ubuntu_noble_amd64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__diagnostic_aggregator__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_uN64__diagnostic_aggregator__ubuntu_noble_amd64__binary) |
+| bin, ubuntu, arm64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__diagnostic_aggregator__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_ujv8_uJv8__diagnostic_aggregator__ubuntu_jammy_arm64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_ujv8_uJv8__diagnostic_aggregator__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_ujv8_uJv8__diagnostic_aggregator__ubuntu_jammy_arm64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_unv8_uNv8__diagnostic_aggregator__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_unv8_uNv8__diagnostic_aggregator__ubuntu_noble_arm64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_unv8_uNv8__diagnostic_aggregator__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_unv8_uNv8__diagnostic_aggregator__ubuntu_noble_arm64__binary) |
+| bin, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_rhel_el864__diagnostic_aggregator__rhel_8_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_rhel_el864__diagnostic_aggregator__rhel_8_x86_64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_rhel_el964__diagnostic_aggregator__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_rhel_el964__diagnostic_aggregator__rhel_9_x86_64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_rhel_el964__diagnostic_aggregator__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_rhel_el964__diagnostic_aggregator__rhel_9_x86_64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_rhel_el964__diagnostic_aggregator__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_rhel_el964__diagnostic_aggregator__rhel_9_x86_64__binary) |
 
-4. Leave the following parameters empty in the `influx` node configuration when using Telegraf as a proxy:
+### diagnostic_common_diagnostics
 
-    - `connection.token`
-    - `connection.bucket`
-    - `connection.organization`
+|         | H | I | J | R |
+| ------- | - | - | - | - |
+| src, ubuntu | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_uJ__diagnostic_common_diagnostics__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_uJ__diagnostic_common_diagnostics__ubuntu_jammy__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_uJ__diagnostic_common_diagnostics__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_uJ__diagnostic_common_diagnostics__ubuntu_jammy__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_uN__diagnostic_common_diagnostics__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_uN__diagnostic_common_diagnostics__ubuntu_noble__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_uN__diagnostic_common_diagnostics__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_uN__diagnostic_common_diagnostics__ubuntu_noble__source) |
+| src, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_el8__diagnostic_common_diagnostics__rhel_8__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_el8__diagnostic_common_diagnostics__rhel_8__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_el9__diagnostic_common_diagnostics__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_el9__diagnostic_common_diagnostics__rhel_9__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_el9__diagnostic_common_diagnostics__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_el9__diagnostic_common_diagnostics__rhel_9__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_el9__diagnostic_common_diagnostics__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_el9__diagnostic_common_diagnostics__rhel_9__source) |
+| bin, ubuntu, amd64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__diagnostic_common_diagnostics__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_uJ64__diagnostic_common_diagnostics__ubuntu_jammy_amd64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_uJ64__diagnostic_common_diagnostics__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_uJ64__diagnostic_common_diagnostics__ubuntu_jammy_amd64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__diagnostic_common_diagnostics__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_uN64__diagnostic_common_diagnostics__ubuntu_noble_amd64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__diagnostic_common_diagnostics__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_uN64__diagnostic_common_diagnostics__ubuntu_noble_amd64__binary) |
+| bin, ubuntu, arm64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__diagnostic_common_diagnostics__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_ujv8_uJv8__diagnostic_common_diagnostics__ubuntu_jammy_arm64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_ujv8_uJv8__diagnostic_common_diagnostics__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_ujv8_uJv8__diagnostic_common_diagnostics__ubuntu_jammy_arm64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_unv8_uNv8__diagnostic_common_diagnostics__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_unv8_uNv8__diagnostic_common_diagnostics__ubuntu_noble_arm64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_unv8_uNv8__diagnostic_common_diagnostics__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_unv8_uNv8__diagnostic_common_diagnostics__ubuntu_noble_arm64__binary) |
+| bin, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_rhel_el864__diagnostic_common_diagnostics__rhel_8_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_rhel_el864__diagnostic_common_diagnostics__rhel_8_x86_64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_rhel_el964__diagnostic_common_diagnostics__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_rhel_el964__diagnostic_common_diagnostics__rhel_9_x86_64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_rhel_el964__diagnostic_common_diagnostics__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_rhel_el964__diagnostic_common_diagnostics__rhel_9_x86_64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_rhel_el964__diagnostic_common_diagnostics__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_rhel_el964__diagnostic_common_diagnostics__rhel_9_x86_64__binary) |
 
-5. Afterwards run the node with the following command:
+### diagnostic_updater
 
-    ```bash
-    ros2 run diagnostic_remote_logging influx --ros-args --params-file <path_to_yaml_file>
-    ```
+|         | H | I | J | R |
+| ------- | - | - | - | - |
+| src, ubuntu | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_uJ__diagnostic_updater__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_uJ__diagnostic_updater__ubuntu_jammy__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_uJ__diagnostic_updater__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_uJ__diagnostic_updater__ubuntu_jammy__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_uN__diagnostic_updater__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_uN__diagnostic_updater__ubuntu_noble__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_uN__diagnostic_updater__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_uN__diagnostic_updater__ubuntu_noble__source) |
+| src, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_el8__diagnostic_updater__rhel_8__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_el8__diagnostic_updater__rhel_8__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_el9__diagnostic_updater__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_el9__diagnostic_updater__rhel_9__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_el9__diagnostic_updater__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_el9__diagnostic_updater__rhel_9__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_el9__diagnostic_updater__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_el9__diagnostic_updater__rhel_9__source) |
+| bin, ubuntu, amd64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__diagnostic_updater__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_uJ64__diagnostic_updater__ubuntu_jammy_amd64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_uJ64__diagnostic_updater__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_uJ64__diagnostic_updater__ubuntu_jammy_amd64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__diagnostic_updater__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_uN64__diagnostic_updater__ubuntu_noble_amd64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__diagnostic_updater__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_uN64__diagnostic_updater__ubuntu_noble_amd64__binary) |
+| bin, ubuntu, arm64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__diagnostic_updater__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_ujv8_uJv8__diagnostic_updater__ubuntu_jammy_arm64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_ujv8_uJv8__diagnostic_updater__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_ujv8_uJv8__diagnostic_updater__ubuntu_jammy_arm64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_unv8_uNv8__diagnostic_updater__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_unv8_uNv8__diagnostic_updater__ubuntu_noble_arm64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_unv8_uNv8__diagnostic_updater__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_unv8_uNv8__diagnostic_updater__ubuntu_noble_arm64__binary) |
+| bin, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_rhel_el864__diagnostic_updater__rhel_8_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_rhel_el864__diagnostic_updater__rhel_8_x86_64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_rhel_el964__diagnostic_updater__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_rhel_el964__diagnostic_updater__rhel_9_x86_64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_rhel_el964__diagnostic_updater__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_rhel_el964__diagnostic_updater__rhel_9_x86_64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_rhel_el964__diagnostic_updater__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_rhel_el964__diagnostic_updater__rhel_9_x86_64__binary) |
+
+### self_test
+
+|         | H | I | J | R |
+| ------- | - | - | - | - |
+| src, ubuntu | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_uJ__self_test__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_uJ__self_test__ubuntu_jammy__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_uJ__self_test__ubuntu_jammy__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_uJ__self_test__ubuntu_jammy__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_uN__self_test__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_uN__self_test__ubuntu_noble__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_uN__self_test__ubuntu_noble__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_uN__self_test__ubuntu_noble__source) |
+| src, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hsrc_el8__self_test__rhel_8__source&style=ball-32x32)](https://build.ros2.org/job/Hsrc_el8__self_test__rhel_8__source) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Isrc_el9__self_test__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Isrc_el9__self_test__rhel_9__source) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jsrc_el9__self_test__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Jsrc_el9__self_test__rhel_9__source) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rsrc_el9__self_test__rhel_9__source&style=ball-32x32)](https://build.ros2.org/job/Rsrc_el9__self_test__rhel_9__source) |
+| bin, ubuntu, amd64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_uJ64__self_test__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_uJ64__self_test__ubuntu_jammy_amd64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_uJ64__self_test__ubuntu_jammy_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_uJ64__self_test__ubuntu_jammy_amd64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_uN64__self_test__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_uN64__self_test__ubuntu_noble_amd64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_uN64__self_test__ubuntu_noble_amd64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_uN64__self_test__ubuntu_noble_amd64__binary) |
+| bin, ubuntu, arm64 | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_ujv8_uJv8__self_test__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_ujv8_uJv8__self_test__ubuntu_jammy_arm64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_ujv8_uJv8__self_test__ubuntu_jammy_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_ujv8_uJv8__self_test__ubuntu_jammy_arm64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_unv8_uNv8__self_test__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_unv8_uNv8__self_test__ubuntu_noble_arm64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_unv8_uNv8__self_test__ubuntu_noble_arm64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_unv8_uNv8__self_test__ubuntu_noble_arm64__binary) |
+| bin, rhel | [![Humble](https://build.ros2.org/buildStatus/icon?job=Hbin_rhel_el864__self_test__rhel_8_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Hbin_rhel_el864__self_test__rhel_8_x86_64__binary) | [![Iron](https://build.ros2.org/buildStatus/icon?job=Ibin_rhel_el964__self_test__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Ibin_rhel_el964__self_test__rhel_9_x86_64__binary) | [![Jazzy](https://build.ros2.org/buildStatus/icon?job=Jbin_rhel_el964__self_test__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Jbin_rhel_el964__self_test__rhel_9_x86_64__binary) | [![Rolling](https://build.ros2.org/buildStatus/icon?job=Rbin_rhel_el964__self_test__rhel_9_x86_64__binary&style=ball-32x32)](https://build.ros2.org/job/Rbin_rhel_el964__self_test__rhel_9_x86_64__binary) | -->
+
+# License
+
+The source code is released under a [BSD 3-Clause license](LICENSE).
