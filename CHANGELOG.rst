@@ -2,22 +2,27 @@
 Changelog for package diagnostic_remote_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.4.3 (2025-04-03)
+4.3.4 (2025-05-12)
 ------------------
-* cleanup (`#450 <https://github.com/ros/diagnostics/issues/450>`_)
-* Grafana Integration (`#425 <https://github.com/ros/diagnostics/issues/425>`_)
+* Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
+* Contributors: David V. Lu, Christian Henkel
+
+4.3.3 (2025-04-03)
+------------------
+* cleanup (#450 <https://github.com/ros/diagnostics/issues/450>)
+* Grafana Integration (#425 <https://github.com/ros/diagnostics/issues/425>)
   * First working version of remote_logging
   * Added more error handling, and skipping values when new line is present in stat
   * Changed default telegraf url to reflect the change to influxdb_v2_listener
   * Made node composable and changed name to influx to better reflect use cases
   * Added README
   ---------
-  Co-authored-by: Daan Wijffels <dwijffels@lely.com>
-  Co-authored-by: Thiever Base <thiever@lely.com>
-  Co-authored-by: Christian Henkel <6976069+ct2034@users.noreply.github.com>
+  Co-authored-by: Daan Wijffels <mailto:dwijffels@lely.com>
+  Co-authored-by: Thiever Base <mailto:thiever@lely.com>
+  Co-authored-by: Christian Henkel <mailto:6976069+ct2034@users.noreply.github.com>
 * Contributors: Christian Henkel, Daan Wijffels
 
-4.4.2 (2025-02-10)
+4.3.2 (2025-02-10)
 ------------------
 
 4.3.1 (2024-07-30)
