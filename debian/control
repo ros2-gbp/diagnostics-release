@@ -1,0 +1,12 @@
+Source: ros-jazzy-diagnostic-remote-logging
+Section: misc
+Priority: optional
+Maintainer: Daan Wijffels <dwijffels@lely.com>
+Build-Depends: debhelper (>= 9.0.0), curl, libcurl4-openssl-dev, libdiagnostic-msgs-dev, python3-diagnostic-msgs, ros-diagnostic-msgs, ros-jazzy-ament-cmake, ros-jazzy-ament-cmake-gtest <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-ament-lint-common <!nocheck>, ros-jazzy-rclcpp-components, ros-jazzy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-diagnostic-remote-logging
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-ros-workspace
+Description: diagnostic_remote_logging
