@@ -1,0 +1,12 @@
+Source: ros-jazzy-diagnostic-aggregator
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake, ros-jazzy-ament-cmake-gtest <!nocheck>, ros-jazzy-ament-cmake-pytest <!nocheck>, ros-jazzy-ament-cmake-python, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-ament-lint-common <!nocheck>, ros-jazzy-diagnostic-msgs, ros-jazzy-launch-pytest <!nocheck>, ros-jazzy-launch-testing-ament-cmake <!nocheck>, ros-jazzy-launch-testing-ros <!nocheck>, ros-jazzy-pluginlib, ros-jazzy-rcl-interfaces, ros-jazzy-rclcpp, ros-jazzy-rclpy, ros-jazzy-std-msgs, ros-jazzy-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostic_aggregator
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-diagnostic-aggregator
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-rclpy, ros-jazzy-ros-workspace
+Description: diagnostic_aggregator
