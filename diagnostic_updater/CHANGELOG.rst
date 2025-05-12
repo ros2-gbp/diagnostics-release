@@ -2,10 +2,14 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.4.2 (2025-02-10)
+4.3.4 (2025-05-12)
+------------------
+* Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
+* Contributors: David V. Lu, Christian Henkel
+
+4.3.2 (2025-02-10)
 ------------------
 * Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_)
-* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_)
 * Contributors: Christian Henkel, Silvio Traversaro
 
 4.3.1 (2024-07-30)
