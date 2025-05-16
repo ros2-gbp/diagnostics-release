@@ -222,7 +222,7 @@ tracks:
     last_version: 4.4.4
     name: diagnostics
     patches: null
-    release_inc: '1'
+    release_inc: '2'
     release_repo_url: https://github.com/ros2-gbp/diagnostics-release.git
     release_tag: :{version}
     ros_distro: rolling
