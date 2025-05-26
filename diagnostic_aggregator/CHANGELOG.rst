@@ -2,6 +2,9 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+4.4.5 (2025-05-26)
+------------------
+
 4.4.4 (2025-05-12)
 ------------------
 * Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
