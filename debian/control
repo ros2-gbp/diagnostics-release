@@ -1,0 +1,12 @@
+Source: ros-kilted-self-test
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-environment, ros-kilted-ament-cmake, ros-kilted-ament-cmake-gtest <!nocheck>, ros-kilted-ament-lint-auto <!nocheck>, ros-kilted-ament-lint-common <!nocheck>, ros-kilted-rclcpp, ros-kilted-ros-workspace
+Homepage: http://www.ros.org/wiki/self_test
+Standards-Version: 3.9.2
+
+Package: ros-kilted-self-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-kilted-rclcpp, ros-kilted-ros-workspace
+Description: self_test
