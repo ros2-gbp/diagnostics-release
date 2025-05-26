@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.8)
-
+cmake_minimum_required(VERSION 3.20)
 project(diagnostic_remote_logging)
+
+# Default to C++17
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
@@ -23,11 +27,7 @@ include_directories(
 )
 add_library(influx_component SHARED src/influxdb.cpp)
 
-target_link_libraries(influx_component PUBLIC
-    ${diagnostic_msgs_TARGETS}
-    rclcpp::rclcpp
-    rclcpp_components::component
-)
+ament_target_dependencies(influx_component ${dependencies})
 
 ament_export_dependencies(influx_component ${dependencies})
 
@@ -50,12 +50,7 @@ if(BUILD_TESTING)
     find_package(ament_cmake_gtest REQUIRED)
     ament_add_gtest(unit_tests test/influx_line_protocol.cpp)
     target_include_directories(unit_tests PRIVATE include)
-    target_link_libraries(unit_tests
-      influx_component
-      ${diagnostic_msgs_TARGETS}
-      rclcpp::rclcpp
-      rclcpp_components::component
-      rclcpp_components::component_manager
-    )
+    target_link_libraries(unit_tests influx_component)
+    ament_target_dependencies(unit_tests ${dependencies} ament_cmake_gtest)
 endif()
 ament_package()

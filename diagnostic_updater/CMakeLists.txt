@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 project(diagnostic_updater)
 
-# Default to C++14
+# Default to C++17
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
@@ -12,27 +12,24 @@ endif()
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 find_package(ament_cmake REQUIRED)
-find_package(ament_cmake_ros REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(diagnostic_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
 
-add_library(${PROJECT_NAME}
-  src/diagnostic_updater.cpp
-)
+add_library(${PROJECT_NAME} INTERFACE)
 target_include_directories(
   ${PROJECT_NAME}
-  PUBLIC
+  INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(
+ament_target_dependencies(
   ${PROJECT_NAME}
-  PUBLIC
-  ${diagnostic_msgs_TARGETS}
-  rclcpp::rclcpp
+  INTERFACE
+  diagnostic_msgs
+  rclcpp
 )
 
 install(
@@ -45,13 +42,13 @@ install(
 )
 
 add_executable(example src/example.cpp)
-target_link_libraries(example
-  PUBLIC
-  ${PROJECT_NAME}
-  ${diagnostic_msgs_TARGETS}
-  ${std_msgs_TARGETS}
-  rclcpp::rclcpp
+ament_target_dependencies(
+  example
+  "diagnostic_msgs"
+  "rclcpp"
+  "std_msgs"
 )
+target_link_libraries(example ${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -67,9 +64,12 @@ if(BUILD_TESTING)
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
   )
-  target_link_libraries(diagnostic_updater_test ${PROJECT_NAME})
-  target_link_libraries(diagnostic_updater_test
-    rclcpp_lifecycle::rclcpp_lifecycle
+  ament_target_dependencies(
+    diagnostic_updater_test
+    "diagnostic_msgs"
+    "rclcpp"
+    "rclcpp_lifecycle"
+    "std_msgs"
   )
 
   ament_add_gtest(diagnostic_status_wrapper_test test/diagnostic_status_wrapper_test.cpp)
@@ -78,11 +78,12 @@ if(BUILD_TESTING)
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
   )
-  target_link_libraries(diagnostic_status_wrapper_test
-    ${diagnostic_msgs_TARGETS}
-    ${std_msgs_TARGETS}
-    rclcpp::rclcpp
-    rclcpp_lifecycle::rclcpp_lifecycle
+  ament_target_dependencies(
+    diagnostic_status_wrapper_test
+    "diagnostic_msgs"
+    "rclcpp"
+    "rclcpp_lifecycle"
+    "std_msgs"
   )
   # SKIPPING FLAKY TEST
   # ament_add_gtest(status_msg_test test/status_msg_test.cpp)
@@ -118,7 +119,6 @@ install(
 ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
 
 ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME})
 ament_export_dependencies(ament_cmake)
 ament_export_dependencies(ament_cmake_python)
 ament_export_dependencies(diagnostic_msgs)
