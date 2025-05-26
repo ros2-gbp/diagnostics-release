@@ -1,3 +1,32 @@
+## diagnostics (rolling) - 4.4.6-1
+
+The packages in the `diagnostics` repository were released into the `rolling` distro by running `/home/hec2le/.local/bin/bloom-release diagnostics -r rolling` on `Mon, 26 May 2025 13:13:32 -0000`
+
+These packages were released:
+- `diagnostic_aggregator`
+- `diagnostic_common_diagnostics`
+- `diagnostic_remote_logging`
+- `diagnostic_updater`
+- `diagnostics`
+- `self_test`
+
+Version of package(s) in repository `diagnostics`:
+
+- upstream repository: https://github.com/ros/diagnostics.git
+- release repository: https://github.com/ros2-gbp/diagnostics-release.git
+- rosdistro version: `4.4.4-2`
+- old version: `4.4.4-2`
+- new version: `4.4.6-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.21.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## diagnostics (humble) - 4.0.6-1
 
 The packages in the `diagnostics` repository were released into the `humble` distro by running `/home/hec2le/.local/bin/bloom-release diagnostics -r humble` on `Mon, 26 May 2025 13:05:02 -0000`
