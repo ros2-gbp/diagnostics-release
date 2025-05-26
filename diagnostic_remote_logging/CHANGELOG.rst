@@ -2,17 +2,15 @@
 Changelog for package diagnostic_remote_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.3.5 (2025-05-26)
+4.2.6 (2025-05-26)
 ------------------
-* Use target_link_libraries instead of ament_target_dependencies (`#507 <https://github.com/ros/diagnostics/issues/507>`_)
-* Contributors: Christoph Fröhlich
+* C++17 and cmake 3.20 everywhere (`#510 <https://github.com/ros/diagnostics/issues/510>`_)
+* Contributors: Christian Henkel
 
-4.3.4 (2025-05-12)
+4.2.4 (2025-05-12)
 ------------------
-* Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
-* Contributors: David V. Lu, Christian Henkel
 
-4.3.3 (2025-04-03)
+4.2.3 (2025-04-03)
 ------------------
 * cleanup (#450 <https://github.com/ros/diagnostics/issues/450>)
 * Grafana Integration (#425 <https://github.com/ros/diagnostics/issues/425>)
@@ -27,20 +25,17 @@ Changelog for package diagnostic_remote_logging
   Co-authored-by: Christian Henkel <mailto:6976069+ct2034@users.noreply.github.com>
 * Contributors: Christian Henkel, Daan Wijffels
 
-4.3.2 (2025-02-10)
+4.2.2 (2025-02-10)
 ------------------
 
-4.3.1 (2024-07-30)
+4.2.1 (2024-07-30)
 ------------------
 
-4.3.0 (2024-06-27 14:08)
+4.2.0 (2024-06-27 14:00)
 ------------------------
 
-3.2.1 (2024-06-27 11:00)
+4.0.1 (2024-06-27 11:12)
 ------------------------
-
-3.2.0 (2024-03-22)
-------------------
 
 3.1.2 (2023-03-24)
 ------------------

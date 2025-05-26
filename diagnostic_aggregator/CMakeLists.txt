@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 project(diagnostic_aggregator)
 
-# Default to C++14
+# Default to C++17
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
@@ -25,11 +25,11 @@ add_library(${PROJECT_NAME} SHARED
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(${PROJECT_NAME} PUBLIC
-  ${diagnostic_msgs_TARGETS}
-  ${std_msgs_TARGETS}
-  pluginlib::pluginlib
-  rclcpp::rclcpp
+ament_target_dependencies(${PROJECT_NAME}
+  "diagnostic_msgs"
+  "pluginlib"
+  "rclcpp"
+  "std_msgs"
 )
 target_compile_definitions(${PROJECT_NAME}
   PRIVATE "DIAGNOSTIC_AGGREGATOR_BUILDING_DLL")
@@ -50,13 +50,14 @@ add_library(${ANALYZERS} SHARED
 target_include_directories(${ANALYZERS} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_link_libraries(${ANALYZERS} PUBLIC
-  ${PROJECT_NAME}
-  ${diagnostic_msgs_TARGETS}
-  ${std_msgs_TARGETS}
-  pluginlib::pluginlib
-  rclcpp::rclcpp
+ament_target_dependencies(${ANALYZERS}
+  "diagnostic_msgs"
+  "pluginlib"
+  "rclcpp"
+  "std_msgs"
 )
+target_link_libraries(${ANALYZERS}
+  ${PROJECT_NAME})
 target_compile_definitions(${ANALYZERS}
   PRIVATE "DIAGNOSTIC_AGGREGATOR_BUILDING_DLL")
 
@@ -70,7 +71,7 @@ target_link_libraries(aggregator_node
 
 # Add analyzer
 add_executable(add_analyzer src/add_analyzer.cpp)
-target_link_libraries(add_analyzer PUBLIC ${rcl_interfaces_TARGETS} rclcpp::rclcpp)
+ament_target_dependencies(add_analyzer rclcpp rcl_interfaces)
 
 # Testing macro
 if(BUILD_TESTING)
@@ -84,29 +85,28 @@ if(BUILD_TESTING)
   file(TO_CMAKE_PATH "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}/aggregator_node" AGGREGATOR_NODE)
   file(TO_CMAKE_PATH "${CMAKE_INSTALL_PREFIX}/lib/${PROJECT_NAME}/add_analyzer" ADD_ANALYZER)
   file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/test_listener.py" TEST_LISTENER)
-  # SKIPPING FLAKY TEST
-  # set(create_analyzers_tests
-  #   "primitive_analyzers"
-  #   "all_analyzers"
-  #   "analyzer_group"
-  #   "empty_root_path")
+  set(create_analyzers_tests
+    "primitive_analyzers"
+    "all_analyzers"
+    "analyzer_group"
+    "empty_root_path")
 
-  # foreach(test_name ${create_analyzers_tests})
-  #   file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/${test_name}.yaml" PARAMETER_FILE)
-  #   file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/expected_output/create_${test_name}" EXPECTED_OUTPUT)
+  foreach(test_name ${create_analyzers_tests})
+    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/${test_name}.yaml" PARAMETER_FILE)
+    file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/expected_output/create_${test_name}" EXPECTED_OUTPUT)
 
-  #   configure_file(
-  #     "test/create_analyzers.launch.py.in"
-  #     "test_create_${test_name}.launch.py"
-  #     @ONLY
-  #   )
-  #   add_launch_test(
-  #     "${CMAKE_CURRENT_BINARY_DIR}/test_create_${test_name}.launch.py"
-  #     TARGET "test_create_${test_name}"
-  #     TIMEOUT 30
-  #     ENV
-  #   )
-  # endforeach()
+    configure_file(
+      "test/create_analyzers.launch.py.in"
+      "test_create_${test_name}.launch.py"
+      @ONLY
+    )
+    add_launch_test(
+      "${CMAKE_CURRENT_BINARY_DIR}/test_create_${test_name}.launch.py"
+      TARGET "test_create_${test_name}"
+      TIMEOUT 30
+      ENV
+    )
+  endforeach()
 
   set(analyzers_output_tests
     "primitive_analyzers"

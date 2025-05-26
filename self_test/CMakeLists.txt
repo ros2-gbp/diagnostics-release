@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 project(self_test)
 
-# Default to C++14
+# Default to C++17
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_C_COMPILER_ID MATCHES "Clang")
@@ -38,13 +38,13 @@ target_include_directories(run_selftest
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(run_selftest
-  PUBLIC
-  ${builtin_interfaces_TARGETS}
-  ${diagnostic_msgs_TARGETS}
-  diagnostic_updater::diagnostic_updater
-  rclcpp::rclcpp
-  rcutils::rcutils
+ament_target_dependencies(
+  run_selftest
+  "builtin_interfaces"
+  "diagnostic_msgs"
+  "diagnostic_updater"
+  "rclcpp"
+  "rcutils"
 )
 
 add_executable(selftest_example example/selftest_example.cpp)
@@ -53,23 +53,19 @@ target_include_directories(selftest_example
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(selftest_example
-  PUBLIC
-  ${builtin_interfaces_TARGETS}
-  ${diagnostic_msgs_TARGETS}
-  diagnostic_updater::diagnostic_updater
-  rclcpp::rclcpp
-  rcutils::rcutils
+ament_target_dependencies(
+  selftest_example
+  "builtin_interfaces"
+  "diagnostic_msgs"
+  "diagnostic_updater"
+  "rclcpp"
+  "rcutils"
 )
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
-
-  list(APPEND AMENT_LINT_AUTO_EXCLUDE
-    ament_cmake_uncrustify  # Inconsistent between jammy and noble
-  )
 
   add_subdirectory(test)
 endif()

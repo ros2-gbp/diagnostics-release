@@ -2,28 +2,24 @@
 Changelog for package self_test
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.3.5 (2025-05-26)
+4.2.6 (2025-05-26)
 ------------------
-* Use target_link_libraries instead of ament_target_dependencies (`#507 <https://github.com/ros/diagnostics/issues/507>`_)
-* Contributors: Christoph Fröhlich
-
-4.3.4 (2025-05-12)
-------------------
-* Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
-* Contributors: David V. Lu, Christian Henkel
-
-4.3.2 (2025-02-10)
-------------------
-
-4.3.1 (2024-07-30)
-------------------
-
-3.2.1 (2024-06-27)
-------------------
-* Building in docker (`#335 <https://github.com/ros/diagnostics/issues/335>`_)
+* C++17 and cmake 3.20 everywhere (`#510 <https://github.com/ros/diagnostics/issues/510>`_)
 * Contributors: Christian Henkel
 
-3.2.0 (2024-03-22)
+4.2.4 (2025-05-12)
+------------------
+
+4.2.2 (2025-02-10)
+------------------
+
+4.2.1 (2024-07-30)
+------------------
+
+4.0.1 (2024-06-27)
+------------------
+
+4.0.0 (2024-03-22)
 ------------------
 * Self test publishes the service under the node name, again (`#269 <https://github.com/ros/diagnostics/issues/269>`_)
 * Contributors: Christian Henkel
