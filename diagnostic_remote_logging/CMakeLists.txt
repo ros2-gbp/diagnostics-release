@@ -27,7 +27,12 @@ include_directories(
 )
 add_library(influx_component SHARED src/influxdb.cpp)
 
-ament_target_dependencies(influx_component ${dependencies})
+target_link_libraries(influx_component PUBLIC
+    ${diagnostic_msgs_TARGETS}
+    rclcpp::rclcpp
+    rclcpp_components::component
+    CURL::libcurl
+)
 
 ament_export_dependencies(influx_component ${dependencies})
 
@@ -50,7 +55,12 @@ if(BUILD_TESTING)
     find_package(ament_cmake_gtest REQUIRED)
     ament_add_gtest(unit_tests test/influx_line_protocol.cpp)
     target_include_directories(unit_tests PRIVATE include)
-    target_link_libraries(unit_tests influx_component)
-    ament_target_dependencies(unit_tests ${dependencies} ament_cmake_gtest)
+    target_link_libraries(unit_tests
+      influx_component
+      ${diagnostic_msgs_TARGETS}
+      rclcpp::rclcpp
+      rclcpp_components::component
+      rclcpp_components::component_manager
+    )
 endif()
 ament_package()
