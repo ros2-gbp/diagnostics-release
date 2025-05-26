@@ -1,0 +1,12 @@
+Source: ros-jazzy-self-test
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-environment, ros-jazzy-ament-cmake, ros-jazzy-ament-cmake-gtest <!nocheck>, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-ament-lint-common <!nocheck>, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Homepage: http://www.ros.org/wiki/self_test
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-self-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-jazzy-rclcpp, ros-jazzy-ros-workspace
+Description: self_test
