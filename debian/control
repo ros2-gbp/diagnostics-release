@@ -1,0 +1,12 @@
+Source: ros-rolling-self-test
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ament-cmake-gtest <!nocheck>, ros-rolling-ament-lint-auto <!nocheck>, ros-rolling-ament-lint-common <!nocheck>, ros-rolling-diagnostic-msgs, ros-rolling-diagnostic-updater, ros-rolling-rclcpp, ros-rolling-ros-environment, ros-rolling-ros-workspace
+Homepage: http://www.ros.org/wiki/self_test
+Standards-Version: 3.9.2
+
+Package: ros-rolling-self-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-rolling-diagnostic-msgs, ros-rolling-diagnostic-updater, ros-rolling-rclcpp, ros-rolling-ros-workspace
+Description: self_test
