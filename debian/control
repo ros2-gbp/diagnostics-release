@@ -1,0 +1,12 @@
+Source: ros-rolling-diagnostics
+Section: misc
+Priority: optional
+Maintainer: Austin Hendrix <namniart@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ros-workspace
+Homepage: http://www.ros.org/wiki/diagnostics
+Standards-Version: 3.9.2
+
+Package: ros-rolling-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-rolling-diagnostic-aggregator, ros-rolling-diagnostic-common-diagnostics, ros-rolling-diagnostic-updater, ros-rolling-self-test, ros-rolling-ros-workspace
+Description: diagnostics
