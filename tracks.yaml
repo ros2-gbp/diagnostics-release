@@ -230,7 +230,8 @@ tracks:
     ros_distro: lyrical
     vcs_type: git
     vcs_uri: https://github.com/ros/diagnostics.git
-    version: :{ask}
+    version: 4.4.6
+    version_saved: :{ask}
   rolling:
     actions:
     - bloom-export-upstream :{vcs_local_uri} :{vcs_type} --tag :{release_tag} --display-uri
