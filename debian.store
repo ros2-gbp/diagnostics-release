@@ -1,1 +1,1 @@
-{"base": "8bbf4dea4afd", "parent": "debian/rolling/diagnostic_remote_logging", "previous": "ba94e430ba25", "trim": "", "trimbase": ""}
+{"base": "e4364ec1", "parent": "debian/lyrical/diagnostic_remote_logging", "previous": "25ff176e", "trim": "", "trimbase": ""}
