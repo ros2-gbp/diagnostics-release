@@ -1,0 +1,12 @@
+Source: ros-jazzy-diagnostic-updater
+Section: misc
+Priority: optional
+Maintainer: "Christian Henkel" <Christian.Henkel2@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), python3-pytest <!nocheck>, ros-jazzy-ament-cmake, ros-jazzy-ament-cmake-gtest <!nocheck>, ros-jazzy-ament-cmake-pytest <!nocheck>, ros-jazzy-ament-cmake-python, ros-jazzy-ament-cmake-ros, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-ament-lint-common <!nocheck>, ros-jazzy-diagnostic-msgs, ros-jazzy-launch <!nocheck>, ros-jazzy-launch-testing <!nocheck>, ros-jazzy-launch-testing-ros <!nocheck>, ros-jazzy-rclcpp, ros-jazzy-rclcpp-lifecycle <!nocheck>, ros-jazzy-rclpy, ros-jazzy-std-msgs, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/diagnostic_updater/
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-diagnostic-updater
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-diagnostic-msgs, ros-jazzy-rclcpp, ros-jazzy-rclpy, ros-jazzy-std-msgs, ros-jazzy-ros-workspace
+Description: Update and publish diagnostic information.
