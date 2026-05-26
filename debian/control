@@ -1,0 +1,12 @@
+Source: ros-lyrical-diagnostic-remote-logging
+Section: misc
+Priority: optional
+Maintainer: "Daan Wijffels" <dwijffels@lely.com>
+Build-Depends: debhelper (>= 9.0.0), curl, libcurl4-openssl-dev, libdiagnostic-msgs-dev, python3-diagnostic-msgs, ros-diagnostic-msgs, ros-lyrical-ament-cmake, ros-lyrical-ament-cmake-gtest <!nocheck>, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-ament-lint-common <!nocheck>, ros-lyrical-rclcpp-components, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/diagnostic_remote_logging/
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-diagnostic-remote-logging
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-ros-workspace
+Description: Tools for remotely logging diagnostics data.
