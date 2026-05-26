@@ -1,0 +1,13 @@
+Source: ros-rolling-diagnostic-common-diagnostics
+Section: misc
+Priority: optional
+Maintainer: "Christian Henkel" <Christian.Henkel2@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ament-cmake-lint-cmake <!nocheck>, ros-rolling-ament-cmake-pytest <!nocheck>, ros-rolling-ament-cmake-python, ros-rolling-ament-cmake-xmllint <!nocheck>, ros-rolling-ament-lint-auto <!nocheck>, ros-rolling-launch-testing-ament-cmake <!nocheck>, ros-rolling-ros-workspace
+Homepage: https://index.ros.org/p/diagnostic_common_diagnostics/
+Standards-Version: 3.9.2
+
+Package: ros-rolling-diagnostic-common-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdiagnostic-updater-dev, lm-sensors, python3-diagnostic-updater, python3-ntplib, python3-psutil, ros-rolling-rclpy, ros-rolling-ros-workspace
+Description: Common diagnostic functions for e.g.
+ HD or CPU usage.
