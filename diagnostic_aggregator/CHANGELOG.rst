@@ -2,7 +2,7 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.4.7 (2026-05-26)
+4.3.7 (2026-05-26)
 ------------------
 * Updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
 * Stop flooding the terminal by default with matches of aggregators (`#364 <https://github.com/ros/diagnostics/issues/364>`_)
@@ -21,20 +21,20 @@ Changelog for package diagnostic_aggregator
 * Adding aggregator tests again (`#467 <https://github.com/ros/diagnostics/issues/467>`_)
 * Contributors: Christian Henkel, Ferry Schoenmakers, Noel Jiménez García
 
-4.4.6 (2025-05-26)
+4.3.6 (2025-05-26)
 ------------------
 * C++17 and cmake 3.20 everywhere (`#510 <https://github.com/ros/diagnostics/issues/510>`_)
 * Contributors: Christian Henkel
 
-4.4.5 (2025-05-26)
+4.3.5 (2025-05-26)
 ------------------
 
-4.4.4 (2025-05-12)
+4.3.4 (2025-05-12)
 ------------------
 * Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
 * Contributors: David V. Lu, Christian Henkel
 
-4.4.2 (2025-02-10)
+4.3.2 (2025-02-10)
 ------------------
 * Checking licenses in CI (`#431 <https://github.com/ros/diagnostics/issues/431>`_)
   * Checking licenses in ci

@@ -2,7 +2,7 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.4.7 (2026-05-26)
+4.3.7 (2026-05-26)
 ------------------
 * updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
 * Some fixes that came apparent when building for lyrical / resolute (`#609 <https://github.com/ros/diagnostics/issues/609>`_)
@@ -15,25 +15,24 @@ Changelog for package diagnostic_updater
 * Fixing "AttributeError: 'RcutilsLogger' object has no attribute 'warn'" (`#521 <https://github.com/ros/diagnostics/issues/521>`_)
 * Contributors: Christian Henkel, Daan Wijffels, Maurice Alexander Purnawan, Vince Reda
 
-4.4.6 (2025-05-26)
+4.3.6 (2025-05-26)
 ------------------
 * C++17 and cmake 3.20 everywhere (`#510 <https://github.com/ros/diagnostics/issues/510>`_)
 * Contributors: Christian Henkel
 
-4.4.5 (2025-05-26)
+4.3.5 (2025-05-26)
 ------------------
 * Use target_link_libraries instead of ament_target_dependencies (`#507 <https://github.com/ros/diagnostics/issues/507>`_)
 * Contributors: Christoph Fröhlich
 
-4.4.4 (2025-05-12)
+4.3.4 (2025-05-12)
 ------------------
 * Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
 * Contributors: David V. Lu, Christian Henkel
 
-4.4.2 (2025-02-10)
+4.3.2 (2025-02-10)
 ------------------
 * Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_)
-* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_)
 * Contributors: Christian Henkel, Silvio Traversaro
 
 4.3.1 (2024-07-30)
