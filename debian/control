@@ -1,0 +1,12 @@
+Source: ros-jazzy-diagnostics
+Section: misc
+Priority: optional
+Maintainer: "Christian Henkel" <Christian.Henkel2@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake, ros-jazzy-ros-workspace
+Homepage: https://index.ros.org/p/diagnostics/
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdiagnostic-aggregator-dev, libdiagnostic-aggregator-tools, libdiagnostic-updater-dev, libself-test-dev, libself-test-tools, python3-diagnostic-common-diagnostics, python3-diagnostic-updater, ros-jazzy-diagnostic-remote-logging, ros-jazzy-ros-workspace
+Description: Diagnostics tools for monitoring and reporting system status.
