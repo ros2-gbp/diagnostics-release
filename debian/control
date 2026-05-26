@@ -1,0 +1,12 @@
+Source: ros-kilted-diagnostics
+Section: misc
+Priority: optional
+Maintainer: "Christian Henkel" <Christian.Henkel2@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake, ros-kilted-ros-workspace
+Homepage: https://index.ros.org/p/diagnostics/
+Standards-Version: 3.9.2
+
+Package: ros-kilted-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-diagnostic-aggregator, ros-kilted-diagnostic-common-diagnostics, ros-kilted-diagnostic-remote-logging, ros-kilted-diagnostic-updater, ros-kilted-self-test, ros-kilted-ros-workspace
+Description: Diagnostics tools for monitoring and reporting system status.
