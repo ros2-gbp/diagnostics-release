@@ -1,0 +1,13 @@
+Source: ros-lyrical-diagnostic-common-diagnostics
+Section: misc
+Priority: optional
+Maintainer: "Christian Henkel" <Christian.Henkel2@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake, ros-lyrical-ament-cmake-lint-cmake <!nocheck>, ros-lyrical-ament-cmake-pytest <!nocheck>, ros-lyrical-ament-cmake-python, ros-lyrical-ament-cmake-xmllint <!nocheck>, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-launch-testing-ament-cmake <!nocheck>, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/diagnostic_common_diagnostics/
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-diagnostic-common-diagnostics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, lm-sensors, python3-ntplib, python3-psutil, ros-lyrical-diagnostic-updater, ros-lyrical-rclpy, ros-lyrical-ros-workspace
+Description: Common diagnostic functions for e.g.
+ HD or CPU usage.
