@@ -2,52 +2,48 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.3.7 (2026-05-26)
+4.2.7 (2026-05-26)
 ------------------
 * updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
-* Some fixes that came apparent when building for lyrical / resolute (`#609 <https://github.com/ros/diagnostics/issues/609>`_)
-* Add starting_up_state parameter to Updater (`#354 <https://github.com/ros/diagnostics/issues/354>`_)
-  Co-authored-by: Noel Jiménez García <noel.jimenez.gar@gmail.com>
+* Change node name from influxdb to influxdb_connector (`#547 <https://github.com/ros/diagnostics/issues/547>`_)
   Co-authored-by: Christian Henkel <christian.henkel2@de.bosch.com>
-  Co-authored-by: Maurice Alexander Purnawan <mauricepurnawan@gmail.com>
-* Get rid of deprecated rclcpp::spin_some() (`#563 <https://github.com/ros/diagnostics/issues/563>`_)
+* Adding aggregator tests again (`#467 <https://github.com/ros/diagnostics/issues/467>`_)
+* Fix node name and port in diagnostic_remote_logging readme (`#515 <https://github.com/ros/diagnostics/issues/515>`_)
 * Remote name splitting (`#525 <https://github.com/ros/diagnostics/issues/525>`_)
-* Fixing "AttributeError: 'RcutilsLogger' object has no attribute 'warn'" (`#521 <https://github.com/ros/diagnostics/issues/521>`_)
-* Contributors: Christian Henkel, Daan Wijffels, Maurice Alexander Purnawan, Vince Reda
+  Co-authored-by: Daan Wijffels <dwijffels@lely.com>
+  Co-authored-by: Christian Henkel <christian.henkel2@de.bosch.com>
+* Fix windows build of diagnostic_remote_logging (`#527 <https://github.com/ros/diagnostics/issues/527>`_)
+  Co-authored-by: Christoph Fröhlich
+* Contributors: Christian Henkel, Christoph Fröhlich, Daan Wijffels
 
-4.3.6 (2025-05-26)
+4.2.6 (2025-05-26)
 ------------------
 * C++17 and cmake 3.20 everywhere (`#510 <https://github.com/ros/diagnostics/issues/510>`_)
 * Contributors: Christian Henkel
 
-4.3.5 (2025-05-26)
+4.2.4 (2025-05-12)
 ------------------
-* Use target_link_libraries instead of ament_target_dependencies (`#507 <https://github.com/ros/diagnostics/issues/507>`_)
-* Contributors: Christoph Fröhlich
 
-4.3.4 (2025-05-12)
+4.2.2 (2025-02-10)
 ------------------
-* Kilted dep fix (`#474 <https://github.com/ros/diagnostics/issues/474>`_)
-* Contributors: David V. Lu, Christian Henkel
+* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#430 <https://github.com/ros/diagnostics/issues/430>`_)
+  Co-authored-by: Silvio Traversaro <silvio@traversaro.it>
+* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#416 <https://github.com/ros/diagnostics/issues/416>`_)
+  * skipping flaky ntp test
+* Contributors: Christian Henkel
 
-4.3.2 (2025-02-10)
+4.2.1 (2024-07-30)
 ------------------
-* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_)
-* Contributors: Christian Henkel, Silvio Traversaro
+* Fix correctly exporting the library (`#388 <https://github.com/ros/diagnostics/issues/388>`_)
+* Contributors: Ramon Wijnands
 
-4.3.1 (2024-07-30)
+4.0.1 (2024-06-27)
 ------------------
-* Fix correctly exporting the library (`#388 <https://github.com/ros/diagnostics/issues/388>`_) (`#393 <https://github.com/ros/diagnostics/issues/393>`_)
-* Minimize header includes by moving impl to .cpp files (`#331 <https://github.com/ros/diagnostics/issues/331>`_) and Fix usage of rclcpp::ok with a non-default context (`#352 <https://github.com/ros/diagnostics/issues/352>`_)  (`#390 <https://github.com/ros/diagnostics/issues/390>`_)
-* Contributors: Christian Henkel, Ramon Wijnands, Hervé Audren
-
-3.2.1 (2024-06-27)
-------------------
-* change(diagnosed-publisher): allow specifying node clock (`#340 <https://github.com/ros/diagnostics/issues/340>`_)
+* change(diagnosed-publisher): allow specifying node clock (`#340 <https://github.com/ros/diagnostics/issues/340>`_) (`#372 <https://github.com/ros/diagnostics/issues/372>`_)
 * Fix usage of rclcpp::ok with a non-default context (`#352 <https://github.com/ros/diagnostics/issues/352>`_)
-* Contributors: Hervé Audren, Rein Appeldoorn
+* Contributors: Christian Henkel, Hervé Audren
 
-3.2.0 (2024-03-22)
+4.0.0 (2024-03-22)
 ------------------
 * including depdency (`#322 <https://github.com/ros/diagnostics/issues/322>`_)
 * Debugging instability introduced by `#317 <https://github.com/ros/diagnostics/issues/317>`_  (`#323 <https://github.com/ros/diagnostics/issues/323>`_)

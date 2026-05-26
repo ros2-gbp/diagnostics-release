@@ -242,9 +242,7 @@ public:
    * The timestamp to be used by the TimeStampStatus class will be
    * extracted from message.header.stamp.
    */
-  virtual void publish(
-    std::unique_ptr<typename PublisherT::ROSMessageType,
-    typename PublisherT::ROSMessageTypeDeleter> message)
+  virtual void publish(typename PublisherT::MessageUniquePtr message)
   {
     tick(message->header.stamp);
     publisher_->publish(std::move(message));

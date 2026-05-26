@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - ros2-kilted
+      - ros2-jazzy
   schedule:
     # Run every week at 20:00 on Sunday
     - cron: "0 20 * * 0"
@@ -18,16 +18,16 @@ jobs:
       - uses: actions/checkout@v6.0.2
       - uses: ros-tooling/setup-ros@0.7.18
         with:
-          required-ros-distributions: rolling
+          required-ros-distributions: jazzy
       - name: Run ament linters
         run: |
-          source /opt/ros/rolling/setup.bash
+          source /opt/ros/jazzy/setup.bash
           linters=(cppcheck cpplint flake8 pep257 uncrustify xmllint)
           packages=(
             diagnostic_aggregator diagnostic_common_diagnostics
             diagnostic_remote_logging diagnostic_updater self_test
           )
-          sudo apt-get install -y "${linters[@]/#/ros-rolling-ament-}"
+          sudo apt-get install -y "${linters[@]/#/ros-jazzy-ament-}"
           failed=()
           for linter in "${linters[@]}"; do
             echo "::group::ament_${linter}"

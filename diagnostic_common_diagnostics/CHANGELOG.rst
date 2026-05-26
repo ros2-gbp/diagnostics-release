@@ -2,52 +2,58 @@
 Changelog for package diagnostic_common_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.3.7 (2026-05-26)
+4.2.7 (2026-05-26)
 ------------------
-* updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
-* CPU monitor fix (`#618 <https://github.com/ros/diagnostics/issues/618>`_)
+* Updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
+* Stop flooding the terminal by default with matches of aggregators (`#364 <https://github.com/ros/diagnostics/issues/364>`_)
+  Co-authored-by: Tim Clephas <tim.clephas@nobleo.nl>
+* Some fixes that came apparent when building for lyrical / resolute (`#609 <https://github.com/ros/diagnostics/issues/609>`_)
+* Option `publish_values` to control whether aggregated state should contain values (`#597 <https://github.com/ros/diagnostics/issues/597>`_)
+  Co-authored-by: Denis Draca <denis.draca@greenroomrobotics.com>
+  Co-authored-by: David Revay <daverevay@gmail.com>
+  Co-authored-by: David Revay <MrBlenny@users.noreply.github.com>
+* Aggregate to stale if one underlying is stale (`#593 <https://github.com/ros/diagnostics/issues/593>`_)
+  Co-authored-by: Ferry Schoenmakers <ferry.schoenmakers@nobleo.nl>
+  Co-authored-by: Tim Clephas <tim.clephas@nobleo.nl>
+* Implement onParametersSet for handling only analyzers node parameters (`#551 <https://github.com/ros/diagnostics/issues/551>`_)
+  Co-authored-by: Christian Henkel <christian.henkel2@de.bosch.com>
+* Adding analyzer tests again (`#555 <https://github.com/ros/diagnostics/issues/555>`_)
 * Adding aggregator tests again (`#467 <https://github.com/ros/diagnostics/issues/467>`_)
-* All packages in one build job (`#532 <https://github.com/ros/diagnostics/issues/532>`_)
-* Correct porting status of diagnostic_common_diagnostics in README (`#530 <https://github.com/ros/diagnostics/issues/530>`_)
-* Fixing "AttributeError: 'RcutilsLogger' object has no attribute 'warn'" (`#521 <https://github.com/ros/diagnostics/issues/521>`_)
-* Contributors: Christian Henkel, Jasper van Brakel
+* Contributors: Christian Henkel, Ferry Schoenmakers, Noel Jiménez García
 
-4.3.6 (2025-05-26)
+4.2.6 (2025-05-26)
 ------------------
 * C++17 and cmake 3.20 everywhere (`#510 <https://github.com/ros/diagnostics/issues/510>`_)
 * Contributors: Christian Henkel
 
-4.3.5 (2025-05-26)
+4.2.4 (2025-05-12)
 ------------------
 
-4.3.4 (2025-05-12)
+4.2.2 (2025-02-10)
 ------------------
-
-4.3.2 (2025-02-10)
-------------------
-* common_diagnostics cleaned hostname string (`#405 <https://github.com/ros/diagnostics/issues/405>`_)
+* common_diagnostics cleaned hostname string (`#405 <https://github.com/ros/diagnostics/issues/405>`_) (`#421 <https://github.com/ros/diagnostics/issues/421>`_)
   * Hostnames are properly cleaned to only contain alphanumeric characters or underscore.
-* Skipping flaky ntp test (`#409 <https://github.com/ros/diagnostics/issues/409>`_)
-  * skipping flaky ntp test
-* Add missing rclpy dependency to common_diagnostics to fix rosdoc2 output (`#402 <https://github.com/ros/diagnostics/issues/402>`_)
-* Contributors: Christian Henkel, R Kent James, sjusner
+  Co-authored-by: sjusner <simon.jusner@knapp.com>
+* Add missing rclpy dependency to common_diagnostics to fix rosdoc2 output (`#402 <https://github.com/ros/diagnostics/issues/402>`_) (`#408 <https://github.com/ros/diagnostics/issues/408>`_)
+  Co-authored-by: R Kent James <kent@caspia.com>
+* Contributors: Christian Henkel
 
-4.3.1 (2024-07-30)
+4.2.1 (2024-07-30)
 ------------------
-* fixing pep257 problems introduced by `#334 <https://github.com/ros/diagnostics/issues/334>`_ (`#384 <https://github.com/ros/diagnostics/issues/384>`_)
-* Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_)
-* Contributors: Antoine Lima, Christian Henkel
+* fixing pep257 problems introduced by `#334 <https://github.com/ros/diagnostics/issues/334>`_ (`#384 <https://github.com/ros/diagnostics/issues/384>`_) (`#392 <https://github.com/ros/diagnostics/issues/392>`_)
+* Fixing ntp launchtest (`#330 <https://github.com/ros/diagnostics/issues/330>`_) (`#391 <https://github.com/ros/diagnostics/issues/391>`_)
+* Port hd_monitor to ROS2 (`#334 <https://github.com/ros/diagnostics/issues/334>`_) (`#383 <https://github.com/ros/diagnostics/issues/383>`_)
+* Contributors: Christian Henkel, Richardvdketterij, Richard
 
-3.2.1 (2024-06-27)
+4.0.1 (2024-06-27)
 ------------------
-* refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_
+* refactor(sensors_monitor): ros2 port `#339 <https://github.com/ros/diagnostics/issues/339>`_ (`#367 <https://github.com/ros/diagnostics/issues/367>`_)
 * refactor(ram_monitor): ros2 port (`#338 <https://github.com/ros/diagnostics/issues/338>`_)
 * NTP monitor improvements (`#342 <https://github.com/ros/diagnostics/issues/342>`_)
 * Using ubuntu ntp server in systemtest (`#346 <https://github.com/ros/diagnostics/issues/346>`_)
-* Fixing ntp launchtest (`#330 <https://github.com/ros/diagnostics/issues/330>`_)
 * Contributors: Christian Henkel, Rein Appeldoorn, Tony Najjar
 
-3.2.0 (2024-03-22)
+4.0.0 (2024-03-22)
 ------------------
 * Port cpu_monitor to ROS2 (`#326 <https://github.com/ros/diagnostics/issues/326>`_)
 * Debugging instability introduced by `#317 <https://github.com/ros/diagnostics/issues/317>`_  (`#323 <https://github.com/ros/diagnostics/issues/323>`_)
