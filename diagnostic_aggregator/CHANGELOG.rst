@@ -2,7 +2,7 @@
 Changelog for package diagnostic_aggregator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.5.7 (2026-05-26)
+4.4.7 (2026-05-26)
 ------------------
 * Updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
 * Stop flooding the terminal by default with matches of aggregators (`#364 <https://github.com/ros/diagnostics/issues/364>`_)

@@ -2,7 +2,7 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.5.7 (2026-05-26)
+4.4.7 (2026-05-26)
 ------------------
 * updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
 * Some fixes that came apparent when building for lyrical / resolute (`#609 <https://github.com/ros/diagnostics/issues/609>`_)

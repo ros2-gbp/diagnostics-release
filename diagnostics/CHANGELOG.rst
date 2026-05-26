@@ -2,7 +2,7 @@
 Changelog for package diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.5.7 (2026-05-26)
+4.4.7 (2026-05-26)
 ------------------
 * updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
 * Contributors: Christian Henkel

@@ -2,7 +2,7 @@
 Changelog for package diagnostic_remote_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.5.7 (2026-05-26)
+4.4.7 (2026-05-26)
 ------------------
 * updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
 * Change node name from influxdb to influxdb_connector (`#547 <https://github.com/ros/diagnostics/issues/547>`_)
