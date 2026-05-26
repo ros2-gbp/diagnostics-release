@@ -117,7 +117,7 @@ tracks:
     - git-bloom-generate -y rosdynrpm --prefix release/:{ros_distro} :{ros_distro}
       -i :{release_inc} --require-os fedora rhel
     devel_branch: ros2-humble
-    last_version: 4.0.6
+    last_version: 4.0.7
     name: diagnostics
     patches: null
     release_inc: '1'
