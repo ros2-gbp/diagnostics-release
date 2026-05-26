@@ -169,7 +169,7 @@ tracks:
     - git-bloom-generate -y rosdynrpm --prefix release/:{ros_distro} :{ros_distro}
       -i :{release_inc} --require-os fedora rhel
     devel_branch: ros2-jazzy
-    last_version: 4.2.4
+    last_version: 4.2.7
     name: diagnostics
     patches: null
     release_inc: '1'
