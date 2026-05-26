@@ -1,3 +1,32 @@
+## diagnostics (humble) - 4.0.7-1
+
+The packages in the `diagnostics` repository were released into the `humble` distro by running `/home/hec2le/.local/bin/bloom-release diagnostics -r humble` on `Tue, 26 May 2026 18:25:57 -0000`
+
+These packages were released:
+- `diagnostic_aggregator`
+- `diagnostic_common_diagnostics`
+- `diagnostic_remote_logging`
+- `diagnostic_updater`
+- `diagnostics`
+- `self_test`
+
+Version of package(s) in repository `diagnostics`:
+
+- upstream repository: https://github.com/ros/diagnostics.git
+- release repository: https://github.com/ros2-gbp/diagnostics-release.git
+- rosdistro version: `4.0.6-1`
+- old version: `4.0.6-1`
+- new version: `4.0.7-1`
+
+Versions of tools used:
+
+- bloom version: `0.14.3`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.21.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## diagnostics (jazzy) - 4.2.7-1
 
 The packages in the `diagnostics` repository were released into the `jazzy` distro by running `/home/hec2le/.local/bin/bloom-release diagnostics -r jazzy` on `Tue, 26 May 2026 18:19:34 -0000`
