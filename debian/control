@@ -1,0 +1,12 @@
+Source: ros-lyrical-self-test
+Section: misc
+Priority: optional
+Maintainer: "Christian Henkel" <Christian.Henkel2@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-environment, ros-lyrical-ament-cmake, ros-lyrical-ament-cmake-gtest <!nocheck>, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-ament-lint-common <!nocheck>, ros-lyrical-rclcpp, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/self_test/
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-self-test
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libdiagnostic-msgs-dev, libdiagnostic-updater-dev, python3-diagnostic-msgs, python3-diagnostic-updater, ros-diagnostic-msgs, ros-lyrical-rclcpp, ros-lyrical-ros-workspace
+Description: Self-test tools for diagnostics.
