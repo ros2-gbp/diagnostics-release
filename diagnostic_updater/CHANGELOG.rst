@@ -2,48 +2,48 @@
 Changelog for package diagnostic_updater
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.2.7 (2026-05-26)
+4.0.7 (2026-05-26)
 ------------------
-* updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
-* Change node name from influxdb to influxdb_connector (`#547 <https://github.com/ros/diagnostics/issues/547>`_)
+* Updating package.xml s (`#616 <https://github.com/ros/diagnostics/issues/616>`_)
+* Stop flooding the terminal by default with matches of aggregators (`#364 <https://github.com/ros/diagnostics/issues/364>`_)
+  Co-authored-by: Tim Clephas <tim.clephas@nobleo.nl>
+* Some fixes that came apparent when building for lyrical / resolute (`#609 <https://github.com/ros/diagnostics/issues/609>`_)
+* Option `publish_values` to control whether aggregated state should contain values (`#597 <https://github.com/ros/diagnostics/issues/597>`_)
+  Co-authored-by: Denis Draca <denis.draca@greenroomrobotics.com>
+  Co-authored-by: David Revay <daverevay@gmail.com>
+  Co-authored-by: David Revay <MrBlenny@users.noreply.github.com>
+* Aggregate to stale if one underlying is stale (`#593 <https://github.com/ros/diagnostics/issues/593>`_)
+  Co-authored-by: Ferry Schoenmakers <ferry.schoenmakers@nobleo.nl>
+  Co-authored-by: Tim Clephas <tim.clephas@nobleo.nl>
+* Implement onParametersSet for handling only analyzers node parameters (`#551 <https://github.com/ros/diagnostics/issues/551>`_)
   Co-authored-by: Christian Henkel <christian.henkel2@de.bosch.com>
+* Adding analyzer tests again (`#555 <https://github.com/ros/diagnostics/issues/555>`_)
 * Adding aggregator tests again (`#467 <https://github.com/ros/diagnostics/issues/467>`_)
-* Fix node name and port in diagnostic_remote_logging readme (`#515 <https://github.com/ros/diagnostics/issues/515>`_)
-* Remote name splitting (`#525 <https://github.com/ros/diagnostics/issues/525>`_)
-  Co-authored-by: Daan Wijffels <dwijffels@lely.com>
-  Co-authored-by: Christian Henkel <christian.henkel2@de.bosch.com>
-* Fix windows build of diagnostic_remote_logging (`#527 <https://github.com/ros/diagnostics/issues/527>`_)
-  Co-authored-by: Christoph Fröhlich
-* Contributors: Christian Henkel, Christoph Fröhlich, Daan Wijffels
+* Contributors: Christian Henkel, Ferry Schoenmakers, Noel Jiménez García
 
-4.2.6 (2025-05-26)
+4.0.6 (2025-05-26)
 ------------------
 * C++17 and cmake 3.20 everywhere (`#510 <https://github.com/ros/diagnostics/issues/510>`_)
 * Contributors: Christian Henkel
 
-4.2.4 (2025-05-12)
+4.0.4 (2025-05-12)
 ------------------
 
-4.2.2 (2025-02-10)
+4.0.2 (2025-02-10)
 ------------------
-* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#430 <https://github.com/ros/diagnostics/issues/430>`_)
+* Add Windows support (`#426 <https://github.com/ros/diagnostics/issues/426>`_) (`#428 <https://github.com/ros/diagnostics/issues/428>`_)
   Co-authored-by: Silvio Traversaro <silvio@traversaro.it>
-* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#416 <https://github.com/ros/diagnostics/issues/416>`_)
+* Skipping flaky tests (`#413 <https://github.com/ros/diagnostics/issues/413>`_) (`#414 <https://github.com/ros/diagnostics/issues/414>`_)
   * skipping flaky ntp test
 * Contributors: Christian Henkel
 
-4.2.1 (2024-07-30)
+3.2.1 (2024-06-27)
 ------------------
-* Fix correctly exporting the library (`#388 <https://github.com/ros/diagnostics/issues/388>`_)
-* Contributors: Ramon Wijnands
-
-4.0.1 (2024-06-27)
-------------------
-* change(diagnosed-publisher): allow specifying node clock (`#340 <https://github.com/ros/diagnostics/issues/340>`_) (`#372 <https://github.com/ros/diagnostics/issues/372>`_)
+* change(diagnosed-publisher): allow specifying node clock 
 * Fix usage of rclcpp::ok with a non-default context (`#352 <https://github.com/ros/diagnostics/issues/352>`_)
 * Contributors: Christian Henkel, Hervé Audren
 
-4.0.0 (2024-03-22)
+3.2.0 (2024-03-22)
 ------------------
 * including depdency (`#322 <https://github.com/ros/diagnostics/issues/322>`_)
 * Debugging instability introduced by `#317 <https://github.com/ros/diagnostics/issues/317>`_  (`#323 <https://github.com/ros/diagnostics/issues/323>`_)
