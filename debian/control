@@ -1,0 +1,12 @@
+Source: ros-lyrical-diagnostic-aggregator
+Section: misc
+Priority: optional
+Maintainer: "Christian Henkel" <Christian.Henkel2@de.bosch.com>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake, ros-lyrical-ament-cmake-gtest <!nocheck>, ros-lyrical-ament-cmake-pytest <!nocheck>, ros-lyrical-ament-cmake-python, ros-lyrical-ament-lint-auto <!nocheck>, ros-lyrical-ament-lint-common <!nocheck>, ros-lyrical-diagnostic-msgs, ros-lyrical-launch-pytest <!nocheck>, ros-lyrical-launch-testing-ament-cmake <!nocheck>, ros-lyrical-launch-testing-ros <!nocheck>, ros-lyrical-pluginlib, ros-lyrical-rcl-interfaces, ros-lyrical-rclcpp, ros-lyrical-rclpy, ros-lyrical-std-msgs, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/diagnostic_aggregator/
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-diagnostic-aggregator
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-rclpy, ros-lyrical-ros-workspace
+Description: Aggregates diagnostic information from multiple sources.
